@@ -1,0 +1,37 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.sun.org.apache.bcel.internal.generic">
+	
+	<ui:style>
+		p {
+			margin: 5px 0 5px 0;
+		}
+		
+		span {
+			outline: none;
+		}
+		
+		body {
+			background-color: black;
+			color: white;
+			font-family: "Courier New", Courier, mono;
+
+		}
+		
+		table tr td {
+			font-family: "Courier New", Courier, mono;
+
+		}
+		
+		.root{
+			margin : 15px 10px 10px 10px;
+
+		}
+		
+	</ui:style>
+
+	<div class="{style.root}">
+		<div ui:field="inputBox"></div>
+		<p><span ui:field="inputStack"></span>$&nbsp;<span contenteditable="true" autofocus="true" ui:field="inputCmd"></span></p>
+	</div>
+
+</ui:UiBinder>

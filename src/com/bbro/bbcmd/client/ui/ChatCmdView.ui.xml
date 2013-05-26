@@ -1,0 +1,56 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder">
+	<ui:style>
+		.all {
+			border-radius: 10px;
+			border: 8px rgb(187, 180, 201) solid;
+			background-color: rgb(187, 180, 201);
+			color: white;
+			height: 90%;
+		}
+		
+		.inputBoxStyle {
+			font-family: tahoma;
+			font-size: 12px;
+			color: white;
+			min-height: 94%;
+			overflow: scroll;
+			padding: 2px 5px 2px 5px;
+			margin: 2px 0 0 0;
+			border-radius: 10px;
+			background-color: black;
+		}
+		
+		.cmdFormStyle {
+			margin: 2px 0 0 0;
+			padding: 5px 2px 2px 2px;
+			background-color: rgb(187, 180, 201);
+			border: 1px rgb(187, 180, 201) solid;
+		}
+		
+		.inputCmdStyle {
+			width: 90%;
+			height: 22px;
+			border: 1px white solid;
+			border-radius: 3px;
+			margin: 2px 0 0 0;
+		}
+		
+		.buttonStyle {
+			width: 8%;
+			height: 30px;
+			margin: 1px;
+		}
+	</ui:style>
+
+	<div class="{style.all}">
+		<div class="{style.inputBoxStyle}" ui:field="inputBox"></div>
+
+		<div class="{style.cmdFormStyle}" id="cmdFormId">
+			<input class="{style.inputCmdStyle}" ui:field="inputCmd" type="text" />
+			<input class="{style.buttonStyle}" ui:field="submitButton"
+				type="submit" value="Cmd" />
+		</div>
+	</div>
+
+</ui:UiBinder>
