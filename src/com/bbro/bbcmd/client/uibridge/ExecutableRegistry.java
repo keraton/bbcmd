@@ -14,10 +14,6 @@ public class ExecutableRegistry {
 	}
 	
 	public static Executable getExecutable() {
-		if(null == executable) {
-			throw new IllegalStateException("Executable cannot be null");
-		}
-		
 		return executable;
 	}
 }

@@ -13,7 +13,7 @@ public class HelloServerCommand implements CommandableServer {
 	@Override
 	public Responsable doCommand(HttpSession session, Requestable request) {
 		SimpleTextResponse response = new SimpleTextResponse();
-		response.setText("Hello World");
+		response.setText("Hello World From Server");
 		return response;
 	}
 

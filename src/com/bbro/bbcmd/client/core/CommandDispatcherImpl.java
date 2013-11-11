@@ -43,10 +43,10 @@ public final class CommandDispatcherImpl implements CommandDispatcher {
 				sb.append(" : illegal option");
 				sb.append("<br/>");
 				sb.append(realCommand.getUsage());
-				ExecutableRegistry.getExecutable().print(sb.toString());
+				ExecutableRegistry.getExecutable().printErr(sb.toString());
 			}
 			catch(CommandException e) {
-				ExecutableRegistry.getExecutable().print("Command error : " + e.getMessage());
+				ExecutableRegistry.getExecutable().printErr("Command error : " + e.getMessage());
 			}
 		}
 	}

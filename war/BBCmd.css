@@ -8,3 +8,7 @@ body {
 	height: 97%;
 	font-family: "Courier New", Courier, mono;
 }
+
+.err {
+	color: orange;
+} 

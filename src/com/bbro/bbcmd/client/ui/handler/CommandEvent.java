@@ -12,7 +12,6 @@ public class CommandEvent extends GwtEvent<CommandHandler> {
 		this.text = text;
 	}
 
-
 	@Override
 	public com.google.gwt.event.shared.GwtEvent.Type<CommandHandler> getAssociatedType() {
 		return TYPE;

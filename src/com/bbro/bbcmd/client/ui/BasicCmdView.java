@@ -62,7 +62,6 @@ public class BasicCmdView extends UIObject implements IBBCmdView {
 					presenter.onUp();
 				}
 				else if (KeyCodes.KEY_DOWN == key){
-					GWT.log("test");
 					presenter.onDown();
 				}
 				
@@ -97,6 +96,15 @@ public class BasicCmdView extends UIObject implements IBBCmdView {
 	@Override
 	public void setPath(String stack) {
 		inputStack.setInnerText(stack);
+	}
+
+	@Override
+	public void addErrText(String err) {
+		com.google.gwt.user.client.Element p = DOM.createElement("p");
+		p.addClassName("err");
+		p.setInnerHTML(err);
+		inputBox.appendChild(p);
+		inputCmd.setInnerText(null);
 	}
 	
 	

@@ -7,6 +7,8 @@ public interface IBBCmdView {
 
 	void addText(String text);
 	
+	void addErrText(String err);
+	
 	void init();
 	
 	String getCmdText();

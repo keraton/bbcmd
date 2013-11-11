@@ -4,20 +4,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.bbro.bbcmd.client.command.AbstractStack;
+import com.bbro.bbcmd.client.command.HelpCommand;
+import com.bbro.bbcmd.client.command.sample_server.HelloServerCommand;
 import com.bbro.bbcmd.client.core.Commandable;
 import com.bbro.bbcmd.client.core.Stackable;
 import com.bbro.bbcmd.client.uibridge.ExecutableRegistry;
 
 public class SampleStack extends AbstractStack implements Commandable, Stackable {
 	
-	public static String KEY = "sample";
+	public static String KEY = "stack";
 	
 	private Map<String, Commandable> samplesCommands = new HashMap<String, Commandable>();
 	
 	public SampleStack() {
 		// Init sample
 		samplesCommands.put(ExitSampleCommand.KEY, new ExitSampleCommand());
-		samplesCommands.put(HelloServerCommand.KEY, new HelloServerCommand());
+		samplesCommands.put(HelpCommand.KEY, new HelpCommand(samplesCommands));
 	}
 
 	@Override
@@ -27,12 +29,12 @@ public class SampleStack extends AbstractStack implements Commandable, Stackable
 
 	@Override
 	public String getDescription() {
-		return "Collections of command sample";
+		return "Example of stack use (stack is like a private environment that contains private commands)";
 	}
 
 	@Override
 	public void doCommand(String... args) {
-		ExecutableRegistry.getExecutable().print("Collections of command sample");
+		ExecutableRegistry.getExecutable().print(getDescription());
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class SampleStack extends AbstractStack implements Commandable, Stackable
 
 	@Override
 	public String getStackPath() {
-		return "@sample";
+		return "@stack";
 	}
 
 	@Override

@@ -3,6 +3,8 @@ package com.bbro.bbcmd.client.ui;
 import java.util.LinkedList;
 
 import com.bbro.bbcmd.client.ui.IBBCmdView.Presenter;
+import com.bbro.bbcmd.client.ui.handler.CommandErrReturnEvent;
+import com.bbro.bbcmd.client.ui.handler.CommandErrReturnHandler;
 import com.bbro.bbcmd.client.ui.handler.CommandEvent;
 import com.bbro.bbcmd.client.ui.handler.CommandReturnEvent;
 import com.bbro.bbcmd.client.ui.handler.CommandReturnHandler;
@@ -28,20 +30,25 @@ public class BBCmdPresenter implements Presenter{
 		view.setPresenter(this);
 		
 		bus.addHandler(CommandReturnEvent.TYPE, new CommandReturnHandler() {
-			
 			@Override
 			public void onRetour(String text) {
 				if (null != text && !"".equals(text)) {
 					view.addText(text);
-					// TODO unblock input 
 				}
 			}
-
 		});
 		
+		bus.addHandler(CommandErrReturnEvent.TYPE, new CommandErrReturnHandler() {
+			
+			@Override
+			public void onRetour(String text) {
+				if (null != text && !"".equals(text)) {
+					view.addErrText(text);
+				}
+			}
+		});
 		
 		bus.addHandler(PathChangeEvent.TYPE, new PathChangeHandler() {
-			
 			@Override
 			public void onPathChange(String newPath) {
 				view.setPath(newPath);

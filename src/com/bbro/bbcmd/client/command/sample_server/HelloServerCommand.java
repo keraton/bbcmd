@@ -1,4 +1,4 @@
-package com.bbro.bbcmd.client.command.sample;
+package com.bbro.bbcmd.client.command.sample_server;
 
 import com.bbro.bbcmd.client.core.CommandException;
 import com.bbro.bbcmd.client.core.CommandServerService;

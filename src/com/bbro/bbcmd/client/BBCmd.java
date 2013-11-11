@@ -1,5 +1,6 @@
 package com.bbro.bbcmd.client;
 
+import com.bbro.bbcmd.client.command.MainStack;
 import com.bbro.bbcmd.client.core.CommandDispatcherImpl;
 import com.bbro.bbcmd.client.ui.BBCmdPresenter;
 import com.bbro.bbcmd.client.ui.BasicCmdView;
@@ -28,7 +29,7 @@ public class BBCmd implements EntryPoint {
 		SimpleEventBus bus = new SimpleEventBus();
 		
 		// Init Core
-		CommandDispatcherImpl commandDispatcher = new CommandDispatcherImpl(MainStackBuilder.buildMainStack());
+		CommandDispatcherImpl commandDispatcher = new CommandDispatcherImpl(MainStack.getINSTANCE());
 		
 		// Init UI
 		IBBCmdView view = new BasicCmdView();

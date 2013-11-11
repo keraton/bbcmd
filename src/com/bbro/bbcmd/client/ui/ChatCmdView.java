@@ -101,6 +101,11 @@ public class ChatCmdView extends UIObject implements IBBCmdView {
 	public void setPath(String stack) {
 		// TODO Auto-generated method stub
 	}
+
+	@Override
+	public void addErrText(String err) {
+		// TODO Auto-generated method stub
+	}
 	
 	
 }
