@@ -44,4 +44,9 @@ public class MockExecutable implements Executable {
 		return err;
 	}
 
+	@Override
+	public void clean() {
+		
+	}
+
 }

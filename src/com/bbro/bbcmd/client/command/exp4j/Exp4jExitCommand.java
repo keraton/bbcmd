@@ -26,7 +26,7 @@ public class Exp4jExitCommand implements ExitCommandable {
 	@Override
 	public void doCommand(String... args) throws CommandException {
 		Exp4jContext.getInstance().clear();
-		ExecutableRegistry.getExecutable().print("Ex4j context clear");
+		ExecutableRegistry.getExecutable().print("Exp4j context clear");
 		ExecutableRegistry.getExecutable().print("Exit ex4j successfull");
 	}
 

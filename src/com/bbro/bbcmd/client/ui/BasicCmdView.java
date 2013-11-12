@@ -3,10 +3,14 @@
  */
 package com.bbro.bbcmd.client.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.bbro.bbcmd.client.element.ElementWrapper;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Node;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
@@ -104,6 +108,21 @@ public class BasicCmdView extends UIObject implements IBBCmdView {
 		p.addClassName("err");
 		p.setInnerHTML(err);
 		inputBox.appendChild(p);
+		inputCmd.setInnerText(null);
+	}
+
+	@Override
+	public void clean() {
+		int length = inputBox.getChildCount();
+		List<Node> nodes = new ArrayList<Node>();
+		for (int i =0; i<length; i++) {
+			nodes.add(inputBox.getChild(i));
+		}
+		
+		for (Node node : nodes) {
+			inputBox.removeChild(node);
+		}
+		
 		inputCmd.setInnerText(null);
 	}
 	

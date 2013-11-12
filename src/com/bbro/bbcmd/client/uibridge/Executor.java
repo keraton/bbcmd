@@ -1,6 +1,7 @@
 package com.bbro.bbcmd.client.uibridge;
 
 import com.bbro.bbcmd.client.core.CommandDispatcher;
+import com.bbro.bbcmd.client.ui.handler.CleanEvent;
 import com.bbro.bbcmd.client.ui.handler.CommandErrReturnEvent;
 import com.bbro.bbcmd.client.ui.handler.CommandReturnEvent;
 import com.bbro.bbcmd.client.ui.handler.PathChangeEvent;
@@ -26,6 +27,11 @@ public class Executor extends CommandUiBridge implements Executable {
 	@Override
 	public void printErr(String err) {
 		bus.fireEvent(new CommandErrReturnEvent(err));
+	}
+
+	@Override
+	public void clean() {
+		bus.fireEvent(new CleanEvent());
 	}
 
 

@@ -7,5 +7,7 @@ public interface Executable {
 	void printPath(String path);
 	
 	void printErr(String err);
+	
+	void clean();
 
 }

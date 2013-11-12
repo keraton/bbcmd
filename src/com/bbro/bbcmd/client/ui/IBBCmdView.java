@@ -27,5 +27,7 @@ public interface IBBCmdView {
 		void onUp();
 		void onDown();
 	}
+
+	void clean();
 	
 }

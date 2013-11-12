@@ -3,6 +3,8 @@ package com.bbro.bbcmd.client.ui;
 import java.util.LinkedList;
 
 import com.bbro.bbcmd.client.ui.IBBCmdView.Presenter;
+import com.bbro.bbcmd.client.ui.handler.CleanEvent;
+import com.bbro.bbcmd.client.ui.handler.CleanHandler;
 import com.bbro.bbcmd.client.ui.handler.CommandErrReturnEvent;
 import com.bbro.bbcmd.client.ui.handler.CommandErrReturnHandler;
 import com.bbro.bbcmd.client.ui.handler.CommandEvent;
@@ -53,6 +55,15 @@ public class BBCmdPresenter implements Presenter{
 			public void onPathChange(String newPath) {
 				view.setPath(newPath);
 				path = newPath;
+			}
+		});
+		
+		bus.addHandler(CleanEvent.TYPE, new CleanHandler() {
+			
+			@Override
+			public void onClean() {
+				view.clean();
+				commandIndex = 0;
 			}
 		});
 	}

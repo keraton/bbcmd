@@ -32,6 +32,7 @@ public final class MainStack extends AbstractStack implements Stackable {
 		addCommand(new HelloServerCommand());
 		addCommand(new DateCommand());
 		addCommand(Exp4jStack.getInstance());
+		addCommand(new CleanCommand());
 	}
 	
 	/**
