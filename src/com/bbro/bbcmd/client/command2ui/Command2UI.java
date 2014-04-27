@@ -1,6 +1,6 @@
 package com.bbro.bbcmd.client.command2ui;
 
-import com.bbro.bbcmd.client.command.CommandDispatcher;
+import com.bbro.bbcmd.client.command.dispatcher.CommandDispatcher;
 import com.bbro.bbcmd.client.command2ui.handler.CommandEvent;
 import com.bbro.bbcmd.client.command2ui.handler.CommandHandler;
 import com.bbro.bbcmd.client.command2ui.handler.UICommandEvent;

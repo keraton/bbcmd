@@ -1,4 +1,6 @@
-package com.bbro.bbcmd.client.command;
+package com.bbro.bbcmd.client.command.dispatcher;
+
+import com.bbro.bbcmd.client.command.Commandable;
 
 public interface CommandDispatcher {
 
