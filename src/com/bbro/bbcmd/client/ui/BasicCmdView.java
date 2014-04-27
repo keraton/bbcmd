@@ -6,7 +6,7 @@ package com.bbro.bbcmd.client.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bbro.bbcmd.client.element.ElementWrapper;
+import com.bbro.bbcmd.client.ui.element.ElementWrapper;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Element;

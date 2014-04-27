@@ -1,12 +1,10 @@
 package com.bbro.bbcmd.client;
 
-import com.bbro.bbcmd.client.bridge.CommandBridge;
-import com.bbro.bbcmd.client.bridge.ExecutableRegistry;
-import com.bbro.bbcmd.client.bridge.handler.UICommandEvent;
-import com.bbro.bbcmd.client.command.ClientStack;
-import com.bbro.bbcmd.client.command.sample.SampleStack;
-import com.bbro.bbcmd.client.command.sample_server.HelloServerCommand;
-import com.bbro.bbcmd.client.core.CommandDispatcherImpl;
+import com.bbro.bbcmd.client.command.CommandDispatcherImpl;
+import com.bbro.bbcmd.client.command.basic.ClientStack;
+import com.bbro.bbcmd.client.command2ui.Command2UI;
+import com.bbro.bbcmd.client.command2ui.ExecutableRegistry;
+import com.bbro.bbcmd.client.command2ui.handler.UICommandEvent;
 import com.bbro.bbcmd.client.ui.BBCmdPresenter;
 import com.bbro.bbcmd.client.ui.BasicCmdView;
 import com.bbro.bbcmd.client.ui.IBBCmdView;
@@ -42,17 +40,13 @@ public class BBCmd implements EntryPoint {
 		BBCmdPresenter presenter = new BBCmdPresenter(view, bus);
 		
 		// Wire Core <-> Command
-		ExecutableRegistry.setExecutable(new CommandBridge(commandDispatcher, bus));
+		ExecutableRegistry.setExecutable(new Command2UI(commandDispatcher, bus));
 		
 		// Root panel
 		RootPanel.getBodyElement().appendChild(view.getElement());
 		
 		// Load 
 		presenter.init();
-		
-		// Add main stack TODO SRP Violation
-		ClientStack.getINSTANCE().addCommand(new HelloServerCommand());
-		ClientStack.getINSTANCE().addCommand(new SampleStack());
 		
 		// Add History TODO SRP violation
 		History.addValueChangeHandler(new ValueChangeHandler<String>() {

@@ -2,7 +2,7 @@ package com.bbro.bbcmd.client.ui;
 
 import java.util.LinkedList;
 
-import com.bbro.bbcmd.client.bridge.handler.UICommandEvent;
+import com.bbro.bbcmd.client.command2ui.handler.UICommandEvent;
 import com.bbro.bbcmd.client.ui.IBBCmdView.Presenter;
 import com.bbro.bbcmd.client.ui.handler.CleanEvent;
 import com.bbro.bbcmd.client.ui.handler.CleanHandler;

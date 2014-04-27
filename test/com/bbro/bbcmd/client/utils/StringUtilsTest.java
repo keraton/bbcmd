@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.bbro.bbcmd.client.common.utils.StringUtils;
+
 public class StringUtilsTest {
 
 	@Test

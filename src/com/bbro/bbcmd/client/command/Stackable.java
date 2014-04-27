@@ -1,0 +1,12 @@
+package com.bbro.bbcmd.client.command;
+
+
+
+public interface Stackable extends Commandable {
+
+	Commandable getCommands(String key);
+	
+	String getPossibleCommand(String key, int counter);
+	
+	boolean isCallDirect();
+}
