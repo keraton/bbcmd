@@ -1,4 +1,4 @@
-package com.bbro.bbcmd.client.uibridge;
+package com.bbro.bbcmd.client.bridge;
 
 public interface Executable {
 	

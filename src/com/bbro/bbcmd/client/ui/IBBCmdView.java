@@ -4,6 +4,14 @@ import com.google.gwt.dom.client.Element;
 
 
 public interface IBBCmdView {
+	
+	public interface Presenter {
+		void init();
+		void onSubmit();
+		void onUp();
+		void onDown();
+		void onTabInput();
+	}
 
 	void addText(String text);
 	
@@ -21,13 +29,8 @@ public interface IBBCmdView {
 	
 	void setPresenter(Presenter presenter);
 
-	public interface Presenter {
-		void init();
-		void onSubmit();
-		void onUp();
-		void onDown();
-	}
-
 	void clean();
+
+	void setSymbol(String symbol);
 	
 }

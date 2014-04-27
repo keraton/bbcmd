@@ -1,33 +1,40 @@
 package com.bbro.bbcmd.client.command;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import com.bbro.bbcmd.client.command.message.MainMessage;
+import com.bbro.bbcmd.client.bridge.ExecutableRegistry;
+import com.bbro.bbcmd.client.core.CommandException;
 import com.bbro.bbcmd.client.core.Commandable;
-import com.google.gwt.core.shared.GWT;
+import com.bbro.bbcmd.client.core.IllegalOptionCommandException;
 
-public class HelpCommand extends AbstractHelpCommand implements Commandable {
+public class HelpCommand implements Commandable {
 	
-	private static MainMessage MESSAGE = GWT.create(MainMessage.class);
+	public static final String KEY = "help";
+	private Map<String, Commandable> commands = new HashMap<String, Commandable>(); 
 
+	
 	public HelpCommand(Map<String, Commandable> commands) {
-		super(commands);
-	}
-
-	@Override
-	protected String getHelpText() {
-		return MESSAGE.command_help_header();
-	}
-
-	@Override
-	public String getDescription() {
-		return MESSAGE.command_help_description();
-	}
-
-	@Override
-	public String getUsage() {
-		return "help command";
+		this.commands = commands;
 	}
 	
+	@Override
+	public String getKey() {
+		return KEY;
+	}
+
+	@Override
+	public void doCommand(String args) throws CommandException {
+		StringBuilder sb = new StringBuilder();
+		sb.append("<table>");
+		for (String key : commands.keySet()) {
+			sb.append("<tr><td>");
+			sb.append(key);
+			sb.append("</td></tr>");
+		}
+		sb.append("</table>");
+		ExecutableRegistry.getExecutable().print(sb.toString());
+	}
+
 
 }

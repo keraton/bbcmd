@@ -46,10 +46,16 @@ public class BasicCmdView extends UIObject implements IBBCmdView {
 	@UiField
 	Element inputStack;
 	
+	@UiField
+	Element inputSymbol;
+	
 
 	public BasicCmdView() {
 		// createAndBindUi 
 		setElement(uiBinder.createAndBindUi(this));
+		
+		// init symbol
+		inputSymbol.setInnerHTML("$");
 		
 		ElementWrapper input = new ElementWrapper(inputCmd);
 		input.onAttach();
@@ -67,6 +73,10 @@ public class BasicCmdView extends UIObject implements IBBCmdView {
 				}
 				else if (KeyCodes.KEY_DOWN == key){
 					presenter.onDown();
+				}
+				else if (KeyCodes.KEY_TAB == key){
+					event.preventDefault();
+					presenter.onTabInput();
 				}
 				
 			}
@@ -126,5 +136,9 @@ public class BasicCmdView extends UIObject implements IBBCmdView {
 		inputCmd.setInnerText(null);
 	}
 	
+	@Override
+	public void setSymbol(String symbol) {
+		inputSymbol.setInnerHTML(symbol);
+	}
 	
 }

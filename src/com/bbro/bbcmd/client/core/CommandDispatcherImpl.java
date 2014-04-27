@@ -2,52 +2,80 @@ package com.bbro.bbcmd.client.core;
 
 import java.util.Stack;
 
-import com.bbro.bbcmd.client.uibridge.ExecutableRegistry;
+import com.bbro.bbcmd.client.bridge.ExecutableRegistry;
+import com.bbro.bbcmd.client.command.NotFoundCommand;
+import com.bbro.bbcmd.client.utils.StringUtils;
+import com.google.gwt.user.client.History;
 
 public final class CommandDispatcherImpl implements CommandDispatcher {
 		
 	private Stackable mainStack;
 	
 	private Stack<Stackable> stacks = new Stack<Stackable>();
+	private NotFoundCommand notFound = new NotFoundCommand();
+	
 	
 	public CommandDispatcherImpl(Stackable mainStack) {
 		this.mainStack = mainStack;
 	}
 	
-	public void dispatch(String command, String... args) {
-		Commandable realCommand = mainStack.getCommands(command);
+	public void dispatch(String command, String args) {
 		
-		if (null != realCommand) {
+		Commandable realCommand = null;
 		
-			if (realCommand instanceof Stackable) {
-				stacks.push(mainStack);
-				mainStack = (Stackable) realCommand;
-				
-				// add new stack
-				ExecutableRegistry.getExecutable().printPath(mainStack.getStackPath());
-			}
+		if (mainStack.isCallDirect()) {
+			realCommand = mainStack.getCommands(StringUtils.regroupCommandAndArgs(command, args));
+		}
+		else {
+			realCommand = mainStack.getCommands(command);
+		}
 			
-			if (realCommand instanceof ExitCommandable) {	
+		if (realCommand == null) {
+			notFound.setNotFoundCmd(command);
+			realCommand = notFound;
+		} 
+		
+		dispatch(realCommand, args);
+		
+	}
+
+	@Override
+	public void dispatch(Commandable command, String args) {
+			
+		if (command instanceof Stackable) {
+			stacks.push(mainStack);
+			mainStack = (Stackable) command;
+			
+			// TODO this is a SRP violation
+			History.newItem(command.getKey(), false);
+		}
+		
+		if (command instanceof ExitCommandable) {
+			if (stacks.size() > 0 ) {
 				mainStack = stacks.pop();
-				
-				// change new stack
-				ExecutableRegistry.getExecutable().printPath(mainStack.getStackPath());
-			}
-			
-			try {
-				realCommand.doCommand(args);
-			}
-			catch (IllegalOptionCommandException e) {
-				StringBuilder sb = new StringBuilder();
-				sb.append(realCommand.getKey());
-				sb.append(" : illegal option");
-				sb.append("<br/>");
-				sb.append(realCommand.getUsage());
-				ExecutableRegistry.getExecutable().printErr(sb.toString());
-			}
-			catch(CommandException e) {
-				ExecutableRegistry.getExecutable().printErr("Command error : " + e.getMessage());
+				History.newItem(mainStack.getKey());
 			}
 		}
+		
+		ExecutableRegistry.getExecutable().printPath(mainStack.getKey());
+			
+		try {
+			command.doCommand(args);
+		}
+		catch (IllegalOptionCommandException e) {
+			StringBuilder sb = new StringBuilder();
+			sb.append(command.getKey());
+			sb.append(" : illegal option");
+			sb.append("<br/>");
+			ExecutableRegistry.getExecutable().printErr(sb.toString());
+		}
+		catch(CommandException e) {
+			ExecutableRegistry.getExecutable().printErr("Command error : " + e.getMessage());
+		}
+	}
+
+	@Override
+	public void findCommand(String text, int counter) {
+		mainStack.getPossibleCommand(text, counter);
 	}
 }

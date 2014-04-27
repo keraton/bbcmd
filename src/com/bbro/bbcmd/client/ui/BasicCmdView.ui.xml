@@ -31,7 +31,7 @@
 
 	<div class="{style.root}">
 		<div ui:field="inputBox"></div>
-		<p><span ui:field="inputStack"></span>$&nbsp;<span contenteditable="true" autofocus="true" ui:field="inputCmd"></span></p>
+		<p><span ui:field="inputStack"></span><span ui:field="inputSymbol"/>&nbsp;<span contenteditable="true" autofocus="true" ui:field="inputCmd"></span></p>
 	</div>
 
 </ui:UiBinder>

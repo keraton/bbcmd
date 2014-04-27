@@ -4,10 +4,6 @@ public interface Commandable {
 	
 	String getKey();
 	
-	String getDescription();
-	
-	String getUsage();
-	
-	void doCommand(String ...args) throws CommandException;
+	void doCommand(String arg) throws CommandException;
 
 }

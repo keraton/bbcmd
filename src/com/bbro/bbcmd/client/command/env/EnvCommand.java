@@ -2,9 +2,9 @@ package com.bbro.bbcmd.client.command.env;
 
 import java.util.Set;
 
+import com.bbro.bbcmd.client.bridge.ExecutableRegistry;
 import com.bbro.bbcmd.client.core.Commandable;
 import com.bbro.bbcmd.client.core.IllegalOptionCommandException;
-import com.bbro.bbcmd.client.uibridge.ExecutableRegistry;
 
 public class EnvCommand implements Commandable {
 	
@@ -16,15 +16,11 @@ public class EnvCommand implements Commandable {
 	}
 
 	@Override
-	public String getDescription() {
-		return "Environnment utilities";
-	}
-
-	@Override
-	public void doCommand(String... args) throws IllegalOptionCommandException {
+	public void doCommand(String textInput) throws IllegalOptionCommandException {
 		Environment environment = Environment.getInstance();
+		String[] args = textInput.split(" ");
 		
-		if (args.length == 0 ) {
+		if (textInput.isEmpty()) {
 			StringBuilder sb = new StringBuilder();
 			Set<String> envs = environment.getKeyEnv();
 			
@@ -54,11 +50,6 @@ public class EnvCommand implements Commandable {
 		else {
 			throw new IllegalOptionCommandException();
 		}
-	}
-
-	@Override
-	public String getUsage() {
-		return "env : key=value";
 	}
 
 }

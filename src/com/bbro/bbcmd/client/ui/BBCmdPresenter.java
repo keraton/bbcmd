@@ -2,12 +2,12 @@ package com.bbro.bbcmd.client.ui;
 
 import java.util.LinkedList;
 
+import com.bbro.bbcmd.client.bridge.handler.UICommandEvent;
 import com.bbro.bbcmd.client.ui.IBBCmdView.Presenter;
 import com.bbro.bbcmd.client.ui.handler.CleanEvent;
 import com.bbro.bbcmd.client.ui.handler.CleanHandler;
 import com.bbro.bbcmd.client.ui.handler.CommandErrReturnEvent;
 import com.bbro.bbcmd.client.ui.handler.CommandErrReturnHandler;
-import com.bbro.bbcmd.client.ui.handler.CommandEvent;
 import com.bbro.bbcmd.client.ui.handler.CommandReturnEvent;
 import com.bbro.bbcmd.client.ui.handler.CommandReturnHandler;
 import com.bbro.bbcmd.client.ui.handler.PathChangeEvent;
@@ -17,14 +17,11 @@ import com.google.gwt.event.shared.SimpleEventBus;
 public class BBCmdPresenter implements Presenter{
 	
 	private SimpleEventBus bus;
-	
 	private IBBCmdView view;
-	
 	private LinkedList<String> commands = new LinkedList<String>();
-	
 	private int commandIndex = 0;
-	
 	private String path = "";
+	private String tempText = "";
 	
 	public BBCmdPresenter(final IBBCmdView view, SimpleEventBus bus) {
 		this.view = view;
@@ -71,12 +68,28 @@ public class BBCmdPresenter implements Presenter{
 	@Override
 	public void onSubmit() {
 		String text = this.view.getCmdText() == null ? "" : this.view.getCmdText();
-		this.view.addText(path + "$ " + text);
-		commands.addFirst(text);
-		commandIndex = 0;
+		if (text.endsWith("\\")) {
+			view.setSymbol(">");
+			this.view.addText(getPathSymbol() + text);
+			tempText += text.substring(0, text.lastIndexOf("\\"));
+		}
+		else {
+			view.setSymbol("$");
+			this.view.addText(getPathSymbol() + text);
+			tempText += text;
+			commands.addFirst(tempText);
+			commandIndex = 0;
+	
+			bus.fireEvent(new UICommandEvent(tempText));
+			tempText = "";
+		}
+	}
 
-		bus.fireEvent(new CommandEvent(text));
-		// TODO Block the input ?
+	private String getPathSymbol() {
+		if (tempText.equals(""))
+			return path + "$ ";
+		else
+			return "> ";
 	}
 
 	@Override
@@ -107,5 +120,9 @@ public class BBCmdPresenter implements Presenter{
 		
 	}
 
+	@Override
+	public void onTabInput() {
+		// TODO Auto-generated method stub
+	}
 
 }

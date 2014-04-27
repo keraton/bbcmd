@@ -1,6 +1,6 @@
 package com.bbro.bbcmd.client.uibridge;
 
-import com.bbro.bbcmd.client.uibridge.Executable;
+import com.bbro.bbcmd.client.bridge.Executable;
 
 public class MockExecutable implements Executable {
 	

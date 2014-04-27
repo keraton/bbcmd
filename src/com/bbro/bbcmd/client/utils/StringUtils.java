@@ -9,4 +9,16 @@ public class StringUtils {
 		}
 		return sb.toString();
 	}
+	
+	public static String reconstructArgs(String...args) {
+		String result = "";
+		for (String string : args) {
+			result += string + " ";
+		}
+		return result;
+	}
+	
+	public static String regroupCommandAndArgs(String cmd, String args){
+		return (cmd + (args == null || args.isEmpty() ? "" : " " + args)).trim();
+	}
 }
