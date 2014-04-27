@@ -1,4 +1,4 @@
-package com.bbro.bbcmd.client.command2ui.handler;
+package com.bbro.bbcmd.client.command2ui.event;
 
 import com.google.gwt.event.shared.EventHandler;
 

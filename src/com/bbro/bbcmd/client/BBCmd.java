@@ -4,7 +4,7 @@ import com.bbro.bbcmd.client.command.basic.ClientStack;
 import com.bbro.bbcmd.client.command.dispatcher.CommandDispatcherImpl;
 import com.bbro.bbcmd.client.command2ui.Command2UI;
 import com.bbro.bbcmd.client.command2ui.ExecutableRegistry;
-import com.bbro.bbcmd.client.command2ui.handler.UICommandEvent;
+import com.bbro.bbcmd.client.command2ui.event.UICommandEvent;
 import com.bbro.bbcmd.client.ui.BBCmdPresenter;
 import com.bbro.bbcmd.client.ui.BasicCmdView;
 import com.bbro.bbcmd.client.ui.IBBCmdView;

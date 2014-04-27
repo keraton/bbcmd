@@ -1,4 +1,4 @@
-package com.bbro.bbcmd.client.srvcaller;
+package com.bbro.bbcmd.client.srvcaller.data;
 
 import com.google.gwt.http.client.RequestBuilder.Method;
 

@@ -1,17 +1,17 @@
 package com.bbro.bbcmd.client.command2ui;
 
 import com.bbro.bbcmd.client.command.dispatcher.CommandDispatcher;
-import com.bbro.bbcmd.client.command2ui.handler.CommandEvent;
-import com.bbro.bbcmd.client.command2ui.handler.CommandHandler;
-import com.bbro.bbcmd.client.command2ui.handler.UICommandEvent;
-import com.bbro.bbcmd.client.command2ui.handler.UICommandHandler;
-import com.bbro.bbcmd.client.command2ui.handler.UIFindCommandEvent;
-import com.bbro.bbcmd.client.command2ui.handler.UIFindCommandHandler;
+import com.bbro.bbcmd.client.command2ui.event.CommandEvent;
+import com.bbro.bbcmd.client.command2ui.event.CommandHandler;
+import com.bbro.bbcmd.client.command2ui.event.UICommandEvent;
+import com.bbro.bbcmd.client.command2ui.event.UICommandHandler;
+import com.bbro.bbcmd.client.command2ui.event.UIFindCommandEvent;
+import com.bbro.bbcmd.client.command2ui.event.UIFindCommandHandler;
 import com.bbro.bbcmd.client.common.utils.StringUtils;
-import com.bbro.bbcmd.client.ui.handler.CleanEvent;
-import com.bbro.bbcmd.client.ui.handler.CommandErrReturnEvent;
-import com.bbro.bbcmd.client.ui.handler.CommandReturnEvent;
-import com.bbro.bbcmd.client.ui.handler.PathChangeEvent;
+import com.bbro.bbcmd.client.ui.event.CleanEvent;
+import com.bbro.bbcmd.client.ui.event.CommandErrReturnEvent;
+import com.bbro.bbcmd.client.ui.event.CommandReturnEvent;
+import com.bbro.bbcmd.client.ui.event.PathChangeEvent;
 import com.google.gwt.event.shared.SimpleEventBus;
 
 public class Command2UI implements Executable {

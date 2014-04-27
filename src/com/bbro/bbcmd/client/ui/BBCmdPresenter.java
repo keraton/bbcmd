@@ -2,16 +2,16 @@ package com.bbro.bbcmd.client.ui;
 
 import java.util.LinkedList;
 
-import com.bbro.bbcmd.client.command2ui.handler.UICommandEvent;
+import com.bbro.bbcmd.client.command2ui.event.UICommandEvent;
 import com.bbro.bbcmd.client.ui.IBBCmdView.Presenter;
-import com.bbro.bbcmd.client.ui.handler.CleanEvent;
-import com.bbro.bbcmd.client.ui.handler.CleanHandler;
-import com.bbro.bbcmd.client.ui.handler.CommandErrReturnEvent;
-import com.bbro.bbcmd.client.ui.handler.CommandErrReturnHandler;
-import com.bbro.bbcmd.client.ui.handler.CommandReturnEvent;
-import com.bbro.bbcmd.client.ui.handler.CommandReturnHandler;
-import com.bbro.bbcmd.client.ui.handler.PathChangeEvent;
-import com.bbro.bbcmd.client.ui.handler.PathChangeHandler;
+import com.bbro.bbcmd.client.ui.event.CleanEvent;
+import com.bbro.bbcmd.client.ui.event.CleanHandler;
+import com.bbro.bbcmd.client.ui.event.CommandErrReturnEvent;
+import com.bbro.bbcmd.client.ui.event.CommandErrReturnHandler;
+import com.bbro.bbcmd.client.ui.event.CommandReturnEvent;
+import com.bbro.bbcmd.client.ui.event.CommandReturnHandler;
+import com.bbro.bbcmd.client.ui.event.PathChangeEvent;
+import com.bbro.bbcmd.client.ui.event.PathChangeHandler;
 import com.google.gwt.event.shared.SimpleEventBus;
 
 public class BBCmdPresenter implements Presenter{
