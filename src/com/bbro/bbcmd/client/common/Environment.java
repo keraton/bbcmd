@@ -1,4 +1,4 @@
-package com.bbro.bbcmd.client.command.basic;
+package com.bbro.bbcmd.client.common;
 
 import java.util.HashMap;
 import java.util.Map;

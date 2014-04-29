@@ -3,9 +3,9 @@ package com.bbro.bbcmd.client.command.basic;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.bbro.bbcmd.client.command.CommandException;
-import com.bbro.bbcmd.client.command.Commandable;
-import com.bbro.bbcmd.client.command.IllegalOptionCommandException;
+import com.bbro.bbcmd.client.command.exception.CommandException;
+import com.bbro.bbcmd.client.command.exception.IllegalOptionCommandException;
+import com.bbro.bbcmd.client.command.share.Commandable;
 import com.bbro.bbcmd.client.command2ui.ExecutableRegistry;
 
 public class HelpCommand implements Commandable {

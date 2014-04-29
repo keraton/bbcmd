@@ -1,4 +1,4 @@
-package com.bbro.bbcmd.client.command;
+package com.bbro.bbcmd.client.command.exception;
 
 public class CommandException extends Exception {
 

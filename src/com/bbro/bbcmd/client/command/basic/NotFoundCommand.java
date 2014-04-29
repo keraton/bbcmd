@@ -1,6 +1,6 @@
 package com.bbro.bbcmd.client.command.basic;
 
-import com.bbro.bbcmd.client.command.Commandable;
+import com.bbro.bbcmd.client.command.share.Commandable;
 import com.bbro.bbcmd.client.command2ui.ExecutableRegistry;
 import com.bbro.bbcmd.client.common.message.MainMessage;
 import com.google.gwt.core.shared.GWT;

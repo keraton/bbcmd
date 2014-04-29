@@ -1,19 +1,21 @@
 package com.bbro.bbcmd.client;
 
-import com.bbro.bbcmd.client.command.basic.ClientStack;
-import com.bbro.bbcmd.client.command.dispatcher.CommandDispatcherImpl;
+import java.util.List;
+
+import com.bbro.bbcmd.client.command.CommandDispatcherImpl;
+import com.bbro.bbcmd.client.command.stack.ClientStack;
+import com.bbro.bbcmd.client.command.stack.AbstractServerStack;
 import com.bbro.bbcmd.client.command2ui.Command2UI;
 import com.bbro.bbcmd.client.command2ui.ExecutableRegistry;
-import com.bbro.bbcmd.client.command2ui.event.UICommandEvent;
+import com.bbro.bbcmd.client.init.InitializerFactory;
+import com.bbro.bbcmd.client.srvcaller.ServerCallerManager;
+import com.bbro.bbcmd.client.test.GWUnit;
 import com.bbro.bbcmd.client.ui.BBCmdPresenter;
 import com.bbro.bbcmd.client.ui.BasicCmdView;
 import com.bbro.bbcmd.client.ui.IBBCmdView;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.shared.GWT;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.SimpleEventBus;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -39,6 +41,12 @@ public class BBCmd implements EntryPoint {
 		IBBCmdView view = new BasicCmdView();
 		BBCmdPresenter presenter = new BBCmdPresenter(view, bus);
 		
+		// Init Server Caller
+		new ServerCallerManager(bus);
+		
+		// Init Server command
+		InitializerFactory.getInstance().init(bus);
+		
 		// Wire Core <-> Command
 		ExecutableRegistry.setExecutable(new Command2UI(commandDispatcher, bus));
 		
@@ -47,16 +55,6 @@ public class BBCmd implements EntryPoint {
 		
 		// Load 
 		presenter.init();
-		
-		// Add History TODO SRP violation
-		History.addValueChangeHandler(new ValueChangeHandler<String>() {
-			
-			@Override
-			public void onValueChange(ValueChangeEvent<String> event) {
-				String token = event.getValue();
-				bus.fireEvent(new UICommandEvent(token));
-			}
-		});
 		
 		GWT.log("BBCmd loaded");
 		

@@ -1,6 +1,6 @@
 package com.bbro.bbcmd.client.command.basic;
 
-import com.bbro.bbcmd.client.command.ExitCommandable;
+import com.bbro.bbcmd.client.command.share.ExitCommandable;
 import com.bbro.bbcmd.client.command2ui.ExecutableRegistry;
 
 public class ExitCommand implements ExitCommandable {

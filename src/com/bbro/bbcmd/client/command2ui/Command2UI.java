@@ -1,12 +1,10 @@
 package com.bbro.bbcmd.client.command2ui;
 
-import com.bbro.bbcmd.client.command.dispatcher.CommandDispatcher;
+import com.bbro.bbcmd.client.command.CommandDispatcher;
 import com.bbro.bbcmd.client.command2ui.event.CommandEvent;
 import com.bbro.bbcmd.client.command2ui.event.CommandHandler;
 import com.bbro.bbcmd.client.command2ui.event.UICommandEvent;
 import com.bbro.bbcmd.client.command2ui.event.UICommandHandler;
-import com.bbro.bbcmd.client.command2ui.event.UIFindCommandEvent;
-import com.bbro.bbcmd.client.command2ui.event.UIFindCommandHandler;
 import com.bbro.bbcmd.client.common.utils.StringUtils;
 import com.bbro.bbcmd.client.ui.event.CleanEvent;
 import com.bbro.bbcmd.client.ui.event.CommandErrReturnEvent;
@@ -48,15 +46,6 @@ public class Command2UI implements Executable {
 			@Override
 			public void onCommand(CommandEvent event) {
 				dispatcher.dispatch(event.getCommandable(), event.getText());
-			}
-		});
-		
-		// UI find command
-		bus.addHandler(UIFindCommandEvent.TYPE, new UIFindCommandHandler() {
-			
-			@Override
-			public void onCommand(UIFindCommandEvent event) {
-				dispatcher.findCommand(event.getText(), event.getCounter());
 			}
 		});
 		

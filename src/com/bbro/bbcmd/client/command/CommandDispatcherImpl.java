@@ -1,16 +1,19 @@
-package com.bbro.bbcmd.client.command.dispatcher;
+package com.bbro.bbcmd.client.command;
 
+import java.util.List;
 import java.util.Stack;
 
-import com.bbro.bbcmd.client.command.CommandException;
-import com.bbro.bbcmd.client.command.Commandable;
-import com.bbro.bbcmd.client.command.ExitCommandable;
-import com.bbro.bbcmd.client.command.IllegalOptionCommandException;
-import com.bbro.bbcmd.client.command.Stackable;
 import com.bbro.bbcmd.client.command.basic.NotFoundCommand;
+import com.bbro.bbcmd.client.command.exception.CommandException;
+import com.bbro.bbcmd.client.command.exception.IllegalOptionCommandException;
+import com.bbro.bbcmd.client.command.share.Commandable;
+import com.bbro.bbcmd.client.command.share.ExitCommandable;
+import com.bbro.bbcmd.client.command.share.Stackable;
+import com.bbro.bbcmd.client.command.stack.ClientStack;
+import com.bbro.bbcmd.client.command.stack.AbstractServerStack;
 import com.bbro.bbcmd.client.command2ui.ExecutableRegistry;
 import com.bbro.bbcmd.client.common.utils.StringUtils;
-import com.google.gwt.user.client.History;
+import com.bbro.bbcmd.client.init.InitializerFactory;
 
 public final class CommandDispatcherImpl implements CommandDispatcher {
 		
@@ -50,15 +53,11 @@ public final class CommandDispatcherImpl implements CommandDispatcher {
 		if (command instanceof Stackable) {
 			stacks.push(mainStack);
 			mainStack = (Stackable) command;
-			
-			// TODO this is a SRP violation
-			History.newItem(command.getKey(), false);
 		}
 		
 		if (command instanceof ExitCommandable) {
 			if (stacks.size() > 0 ) {
 				mainStack = stacks.pop();
-				History.newItem(mainStack.getKey());
 			}
 		}
 		
@@ -79,8 +78,4 @@ public final class CommandDispatcherImpl implements CommandDispatcher {
 		}
 	}
 
-	@Override
-	public void findCommand(String text, int counter) {
-		mainStack.getPossibleCommand(text, counter);
-	}
 }

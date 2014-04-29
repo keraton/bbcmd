@@ -1,11 +1,15 @@
-package com.bbro.bbcmd.client.command.basic;
+package com.bbro.bbcmd.client.command.stack;
 
 import java.util.HashMap;
-import java.util.Set;
 
-import com.bbro.bbcmd.client.command.CommandException;
-import com.bbro.bbcmd.client.command.Commandable;
-import com.bbro.bbcmd.client.command.Stackable;
+import com.bbro.bbcmd.client.command.basic.CleanCommand;
+import com.bbro.bbcmd.client.command.basic.EchoCommand;
+import com.bbro.bbcmd.client.command.basic.EmptyCommand;
+import com.bbro.bbcmd.client.command.basic.EnvCommand;
+import com.bbro.bbcmd.client.command.basic.HelpCommand;
+import com.bbro.bbcmd.client.command.exception.CommandException;
+import com.bbro.bbcmd.client.command.share.Commandable;
+import com.bbro.bbcmd.client.command.share.Stackable;
 
 public final class ClientStack implements Stackable {
 	
@@ -48,21 +52,5 @@ public final class ClientStack implements Stackable {
 	public boolean isCallDirect() {
 		return false;
 	}
-
-	@Override
-	public String getPossibleCommand(String key, int counter) {
-		Set<String> keys = mapCommands.keySet();
-		int innerCounter = 0;
-		for (String commandKey : keys) {
-			if (commandKey.startsWith(key)) {
-				if (counter ==innerCounter ) {
-					return commandKey;
-				}
-				innerCounter ++;
-			}
-		}
-		return "";
-	}
-
 
 }

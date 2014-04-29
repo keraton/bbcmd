@@ -1,6 +1,6 @@
 package com.bbro.bbcmd.client.command.basic;
 
-import com.bbro.bbcmd.client.command.Commandable;
+import com.bbro.bbcmd.client.command.share.Commandable;
 
 public class EmptyCommand implements Commandable {
 
