@@ -31,11 +31,9 @@ public class MathJServiceServlet extends HttpServlet {
 		String value = (String) req.getParameter("value");
 		//+ => %252B
 		// / => %252F
-		System.out.println("before : " + value);
 		value = value.replaceAll("%2B", "+");
 		value = value.replaceAll("%2F", "/");
 		value = value.replaceAll("%3D", "=");
-		System.out.println("before : " + value);
 		
 		FunctionReader reader = new FunctionStringReader();
 		try {
@@ -47,7 +45,6 @@ public class MathJServiceServlet extends HttpServlet {
 				treatSet(resp, value, reader, context, mathJ);
 			}
 			else {
-				System.out.println(value);
 				Function func = reader.read(value.trim());
 				resp.getWriter().write("" + mathJ.apply(func).value());
 			}
