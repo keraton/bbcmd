@@ -70,12 +70,12 @@ public class BBCmdPresenter implements Presenter{
 		String text = this.view.getCmdText() == null ? "" : this.view.getCmdText();
 		if (text.endsWith("\\")) {
 			view.setSymbol(">");
-			this.view.addText(getPathSymbol() + text);
+			this.view.setTextFromInputCmd();
 			tempText += text.substring(0, text.lastIndexOf("\\"));
 		}
 		else {
 			view.setSymbol("$");
-			this.view.addText(getPathSymbol() + text);
+			this.view.setTextFromInputCmd();
 			tempText += text;
 			commands.addFirst(tempText);
 			commandIndex = 0;
@@ -83,13 +83,6 @@ public class BBCmdPresenter implements Presenter{
 			bus.fireEvent(new UICommandEvent(tempText));
 			tempText = "";
 		}
-	}
-
-	private String getPathSymbol() {
-		if (tempText.equals(""))
-			return path + "$ ";
-		else
-			return "> ";
 	}
 
 	@Override

@@ -1,7 +1,7 @@
-package com.bbro.bbcmd.client.srvcaller;
+package com.bbro.bbcmd.client.servercaller;
 
-import com.bbro.bbcmd.client.srvcaller.event.ServerCommandEvent;
-import com.bbro.bbcmd.client.srvcaller.event.ServerCommandHandler;
+import com.bbro.bbcmd.client.servercaller.event.ServerCommandEvent;
+import com.bbro.bbcmd.client.servercaller.event.ServerCommandHandler;
 import com.google.gwt.event.shared.SimpleEventBus;
 
 public class ServerCallerManager {

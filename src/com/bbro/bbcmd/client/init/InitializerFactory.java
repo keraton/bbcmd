@@ -5,7 +5,7 @@ import com.google.gwt.event.shared.SimpleEventBus;
 public class InitializerFactory {
 	
 	private static InitializerFactory instance = new InitializerFactory();
-	private JSInitializer initializer;
+	private Initializer initializer;
 	
 	public static InitializerFactory getInstance() {
 		return instance;
@@ -14,11 +14,15 @@ public class InitializerFactory {
 	private InitializerFactory() {
 	}
 	
-	public void init(SimpleEventBus bus) {
+	public InitInfo init(SimpleEventBus bus) {
 		if (null == initializer) {
 			initializer = new JSInitializer(bus);
-			initializer.buildServerStack();
 		}
+		return initializer.getInitInfo();
+	}
+	
+	public void buildServerStack() {
+		initializer.buildServerStack();
 	}
 
 }

@@ -1,6 +1,6 @@
-package com.bbro.bbcmd.client.srvcaller.event;
+package com.bbro.bbcmd.client.servercaller.event;
 
-import com.bbro.bbcmd.client.srvcaller.data.RequestData;
+import com.bbro.bbcmd.client.servercaller.data.RequestData;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.http.client.RequestCallback;
 

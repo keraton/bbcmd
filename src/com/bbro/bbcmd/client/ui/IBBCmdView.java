@@ -32,5 +32,7 @@ public interface IBBCmdView {
 	void clean();
 
 	void setSymbol(String symbol);
+
+	void setTextFromInputCmd();
 	
 }

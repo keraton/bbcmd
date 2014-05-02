@@ -32,5 +32,25 @@
     <servlet-name>SystemServiceServlet</servlet-name>
     <url-pattern>/_ah/spi/*</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>TestServiceServlet</servlet-name>
+    <servlet-class>com.bbro.bbcmd.server.TestServiceServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>TestServiceServlet</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>MathJServiceServlet</servlet-name>
+    <servlet-class>com.bbro.bbcmd.server.MathJServiceServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>MathJServiceServlet</servlet-name>
+    <url-pattern>/mathj</url-pattern>
+  </servlet-mapping>
 
 </web-app>

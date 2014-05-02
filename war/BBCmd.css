@@ -1,14 +1,48 @@
-html {
-	height: 100%;
-}
-
-body {
+/* html { */
+/* 	height: 100%; */
+/* } */
+.bbcmd_body {
 	margin: 0;
 	padding: 0;
-	height: 97%;
 	font-family: "Courier New", Courier, mono;
+	background-color: black;
+	color: white;
+	display: inline-block;
+}
+
+.bbcmd_body_box {
+	border: 2px solid;
+	border-radius: 10px;
 }
 
 .err {
 	color: orange;
-} 
+}
+
+.desc {
+	color: yellow;
+}
+
+.root {
+	margin: 15px 10px 10px 10px;
+	overflow: auto;
+	width: 97%;
+	height: 97%;
+}
+
+.bbcmd_body p {
+	margin: 5px 0 5px 0;
+}
+
+.bbcmd_body span {
+	outline: none;
+}
+
+.bbcmd_body table {
+	margin-top: -7px;
+	padding: 0 0 0 0;	
+}
+
+.bbcmd_body table tr td {
+	font-family: "Courier New", Courier, mono;
+}

@@ -10,6 +10,7 @@ import com.bbro.bbcmd.client.command.basic.HelpCommand;
 import com.bbro.bbcmd.client.command.exception.CommandException;
 import com.bbro.bbcmd.client.command.share.Commandable;
 import com.bbro.bbcmd.client.command.share.Stackable;
+import com.bbro.bbcmd.client.command.stack.js.EvalStackable;
 
 public final class ClientStack implements Stackable {
 	
@@ -22,11 +23,12 @@ public final class ClientStack implements Stackable {
 	private HashMap<String, Commandable> mapCommands = new HashMap<String, Commandable>();
 	
 	private ClientStack() {
-		mapCommands.put(CleanCommand.KEY, new CleanCommand());
-		mapCommands.put(EnvCommand.KEY, new EnvCommand());
-		mapCommands.put(EmptyCommand.KEY, new EmptyCommand());
-		mapCommands.put(HelpCommand.KEY, new HelpCommand(mapCommands));
-		mapCommands.put(EchoCommand.KEY, new EchoCommand());
+		addCommand(new CleanCommand());
+		addCommand(new HelpCommand(mapCommands));
+		addCommand(new EnvCommand());
+		addCommand(new EmptyCommand());
+		addCommand(new EchoCommand());
+		addCommand(new EvalStackable());
 	}
 
 	public void addCommand(Commandable command){
@@ -46,11 +48,6 @@ public final class ClientStack implements Stackable {
 	@Override
 	public void doCommand(String args) throws CommandException {
 		throw new CommandException("Main command should not be called");
-	}
-
-	@Override
-	public boolean isCallDirect() {
-		return false;
 	}
 
 }

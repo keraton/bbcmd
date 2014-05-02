@@ -1,4 +1,4 @@
-package com.bbro.bbcmd.client.srvcaller.event;
+package com.bbro.bbcmd.client.servercaller.event;
 
 import com.google.gwt.event.shared.EventHandler;
 

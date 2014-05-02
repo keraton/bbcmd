@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.bbro.bbcmd.client.command.exception.CommandException;
-import com.bbro.bbcmd.client.command.exception.IllegalOptionCommandException;
 import com.bbro.bbcmd.client.command.share.Commandable;
+import com.bbro.bbcmd.client.command.share.Descriptable;
 import com.bbro.bbcmd.client.command2ui.ExecutableRegistry;
 
 public class HelpCommand implements Commandable {
@@ -27,13 +27,22 @@ public class HelpCommand implements Commandable {
 	public void doCommand(String args) throws CommandException {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<table>");
-		for (String key : commands.keySet()) {
-			sb.append("<tr><td>");
-			sb.append(key);
-			sb.append("</td></tr>");
+		for (Commandable command : commands.values()) {
+			sb.append("<tr>");
+			appendTD(sb, command.getKey());
+			appendTD(sb, command instanceof Descriptable ? "<span class=\'desc\'> " + 
+									((Descriptable)command).getDescription() + "</span>" 
+									: "");
+			sb.append("</tr>");
 		}
 		sb.append("</table>");
 		ExecutableRegistry.getExecutable().print(sb.toString());
+	}
+
+	private void appendTD(StringBuilder sb, String key) {
+		sb.append("<td>");
+		sb.append(key);
+		sb.append("</td>");
 	}
 
 

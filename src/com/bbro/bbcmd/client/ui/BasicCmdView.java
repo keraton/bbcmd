@@ -11,6 +11,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Node;
+import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
@@ -32,6 +33,7 @@ public class BasicCmdView extends UIObject implements IBBCmdView {
 	}
 	
 	private Presenter presenter;
+	private String cmd;
 	
 	public void setPresenter(Presenter presenter) {
 		this.presenter = presenter;
@@ -41,13 +43,7 @@ public class BasicCmdView extends UIObject implements IBBCmdView {
 	DivElement inputBox;
 	
 	@UiField
-	Element inputCmd;
-	
-	@UiField
-	Element inputStack;
-	
-	@UiField
-	Element inputSymbol;
+	Element inputCmd, boxCmd, inputStack, inputSymbol;
 	
 
 	public BasicCmdView() {
@@ -60,30 +56,87 @@ public class BasicCmdView extends UIObject implements IBBCmdView {
 		ElementWrapper input = new ElementWrapper(inputCmd);
 		input.onAttach();
 		
+		ElementWrapper inputBox = new ElementWrapper(boxCmd);
+		inputBox.onAttach();
+		
 		input.addKeyDownHandler(new KeyDownHandler() {
 			
 			@Override
 			public void onKeyDown(KeyDownEvent event) {
-				int key = event.getNativeKeyCode();
-				if (KeyCodes.KEY_ENTER == key) {
-					presenter.onSubmit();
-				}
-				else if (KeyCodes.KEY_UP == key){
-					presenter.onUp();
-				}
-				else if (KeyCodes.KEY_DOWN == key){
-					presenter.onDown();
-				}
-				else if (KeyCodes.KEY_TAB == key){
-					event.preventDefault();
-					presenter.onTabInput();
-				}
-				
+				onInputKeyDownHandler(event);
 			}
+
+		});
+		
+		inputBox.addKeyDownHandler(new KeyDownHandler() {
+			
+			@Override
+			public void onKeyDown(KeyDownEvent event) {
+				onEditKeyDown(event);
+			}
+
 		});
 		
 	}
+	
+	private void onEditKeyDown(KeyDownEvent event) {
+		int key = event.getNativeKeyCode();
+		if (KeyCodes.KEY_ENTER == key) {
+			if (event.isControlKeyDown()) {
+				focusOnInputMode();
+				presenter.onSubmit();
+			}
+		}
+	}
+	
+	private void focusOnInputMode() {
+		cmd = boxCmd.getInnerText();
+		boxCmd.getStyle().setVisibility(Visibility.HIDDEN);
+		inputCmd.getStyle().setVisibility(Visibility.VISIBLE);
+		inputCmd.focus();
+		inputCmd.setInnerText(boxCmd.getInnerHTML());
+		boxCmd.setInnerText("");
+	}
 
+	private void onInputKeyDownHandler(KeyDownEvent event) {
+		int key = event.getNativeKeyCode();
+		if (KeyCodes.KEY_ENTER == key) {
+			if (event.isControlKeyDown()) {
+				focusOnBoxMode();
+			}
+			else {
+				cmd = inputCmd.getInnerText();
+				presenter.onSubmit();
+			}
+		}
+		else if (KeyCodes.KEY_UP == key){
+			presenter.onUp();
+		}
+		else if (KeyCodes.KEY_DOWN == key){
+			presenter.onDown();
+		}
+		else if (KeyCodes.KEY_TAB == key){
+			event.preventDefault();
+			presenter.onTabInput();
+		}
+	}
+
+	private void focusOnBoxMode() {
+		boxCmd.setInnerText(inputCmd.getInnerText());
+		inputCmd.setInnerText("");
+		inputCmd.getStyle().setVisibility(Visibility.HIDDEN);
+		boxCmd.getStyle().setVisibility(Visibility.VISIBLE);
+		boxCmd.focus();
+	}
+	
+	@Override
+	public void setTextFromInputCmd(){
+		addText(  inputStack.getInnerText()
+				+ inputSymbol.getInnerText() 
+				+ " " 
+				+ inputCmd.getInnerText());
+	}
+	
 	@Override
 	public void addText(String text) {
 		com.google.gwt.user.client.Element p = DOM.createElement("p");
@@ -94,7 +147,7 @@ public class BasicCmdView extends UIObject implements IBBCmdView {
 	
 	@Override
 	public String getCmdText() {
-		return inputCmd.getInnerText();
+		return cmd;
 	}
 
 	@Override

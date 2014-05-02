@@ -24,6 +24,18 @@
     <!-- be added before this line.                -->
     <!--                                           -->
     <script type="text/javascript" language="javascript" src="bbcmd/bbcmd.nocache.js"></script>
+    <script>
+        bbcmdObj = {
+        		id		:"bbcmd_id",
+        		width 	: 600,
+        		height 	: 400,
+        		useBody : true,
+        		commands : [
+        		            {key:"test", description:"test description", urlPath:"test?value="},
+        		            {key:"mathj", description:"MathJ equation test", urlPath:"mathj?value="}
+        		            ]
+        		}; 
+	</script>
   </head>
 
   <!--                                           -->
@@ -40,6 +52,8 @@
         in order for this application to display correctly.
       </div>
     </noscript>
+    
+    <div id="bbcmd_id"></div>
 
   </body>
 </html>

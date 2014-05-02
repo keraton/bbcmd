@@ -1,6 +1,6 @@
-package com.bbro.bbcmd.client.srvcaller;
+package com.bbro.bbcmd.client.servercaller;
 
-import com.bbro.bbcmd.client.srvcaller.data.RequestData;
+import com.bbro.bbcmd.client.servercaller.data.RequestData;
 import com.google.gwt.http.client.RequestCallback;
 
 public interface ServerCaller {
