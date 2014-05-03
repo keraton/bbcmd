@@ -21,21 +21,14 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.command.exception;
 
-import static org.junit.Assert.*;
+public class IllegalOptionCommandException extends CommandException {
 
-import org.junit.Test;
+	private static final long serialVersionUID = 1L;
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+	public IllegalOptionCommandException() {
+		super("Illegal option :");
 	}
 
 }

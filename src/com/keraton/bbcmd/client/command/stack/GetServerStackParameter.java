@@ -21,21 +21,45 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.command.stack;
 
-import static org.junit.Assert.*;
+import com.google.gwt.event.shared.SimpleEventBus;
 
-import org.junit.Test;
+public class GetServerStackParameter {
+	public String key;
+	public String urlPath;
+	public String description;
+	public SimpleEventBus bus;
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+	public final String getKey() {
+		return key;
 	}
 
+	public final void setKey(String key) {
+		this.key = key;
+	}
+
+	public final String getUrlPath() {
+		return urlPath;
+	}
+
+	public final void setUrlPath(String urlPath) {
+		this.urlPath = urlPath;
+	}
+
+	public final String getDescription() {
+		return description;
+	}
+
+	public final void setDescription(String description) {
+		this.description = description;
+	}
+
+	public final SimpleEventBus getBus() {
+		return bus;
+	}
+
+	public final void setBus(SimpleEventBus bus) {
+		this.bus = bus;
+	}
 }

@@ -23,7 +23,7 @@
  */
 package  com.bbro.bbcmd.client.uibridge;
 
-import com.bbro.bbcmd.client.command2ui.ExecutableRegistry;
+import com.keraton.bbcmd.client.command2ui.ExecutableRegistry;
 
 public class ExecutableRegistryMockInit {
 

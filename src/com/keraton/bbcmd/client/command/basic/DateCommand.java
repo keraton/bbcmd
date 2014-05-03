@@ -21,21 +21,26 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.command.basic;
 
-import static org.junit.Assert.*;
+import java.util.Date;
 
-import org.junit.Test;
+import com.keraton.bbcmd.client.command.exception.CommandException;
+import com.keraton.bbcmd.client.command.share.Commandable;
+import com.keraton.bbcmd.client.command2ui.ExecutableRegistry;
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
+public class DateCommand implements Commandable {
+	
+	public final static String KEY = "date";
 
-public class StringUtilsTest {
+	@Override
+	public String getKey() {
+		return KEY;
+	}
 
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+	@Override
+	public void doCommand(String args) throws CommandException {
+		ExecutableRegistry.getExecutable().print("" + new Date());
 	}
 
 }

@@ -23,7 +23,7 @@
  */
 package  com.bbro.bbcmd.client.uibridge;
 
-import com.bbro.bbcmd.client.command2ui.Executable;
+import com.keraton.bbcmd.client.command2ui.Executable;
 
 public class MockExecutable implements Executable {
 	

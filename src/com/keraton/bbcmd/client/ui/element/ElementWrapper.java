@@ -21,21 +21,33 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.ui.element;
 
-import static org.junit.Assert.*;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.Widget;
 
-import org.junit.Test;
+public class ElementWrapper extends Widget implements HasClickHandlers {
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
+    public ElementWrapper(Element theElement) {
+    	setElement(theElement);
+    }
 
-public class StringUtilsTest {
+    public HandlerRegistration addClickHandler(ClickHandler handler) {
+    	return addDomHandler(handler, ClickEvent.getType());
+    }
+    
+    public HandlerRegistration addKeyDownHandler(KeyDownHandler handler) {
+    	return addDomHandler(handler, KeyDownEvent.getType());
+    }
 
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
-	}
+    public void onAttach() {
+        super.onAttach();
+    }
 
 }

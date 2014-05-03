@@ -21,21 +21,21 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.command.basic;
 
-import static org.junit.Assert.*;
+import com.keraton.bbcmd.client.command.share.Commandable;
 
-import org.junit.Test;
+public class EmptyCommand implements Commandable {
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
+	public static final String KEY = "";
 
-public class StringUtilsTest {
+	@Override
+	public String getKey() {
+		return "";
+	}
 
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+	@Override
+	public void doCommand(String args) {
 	}
 
 }

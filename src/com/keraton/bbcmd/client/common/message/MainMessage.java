@@ -21,21 +21,19 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.common.message;
 
-import static org.junit.Assert.*;
+import com.google.gwt.i18n.client.Messages;
 
-import org.junit.Test;
-
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
-	}
+public interface MainMessage extends Messages {
+	
+	@Key("command.not.found")
+	String command_not_found(String command);
+	
+	@Key("command.help.header")
+	String command_help_header();
+	
+	@Key("command.help.description")
+	String command_help_description();
 
 }

@@ -21,21 +21,40 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.common;
 
-import static org.junit.Assert.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
-import org.junit.Test;
+public class Environment {
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
+	private static Environment instance = new Environment();
 
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+	public static Environment getInstance(){
+		return instance;
 	}
-
+	
+	private Environment(){
+		envMaps = new HashMap<String, String>();
+		envMaps.put("USER_AGENT", getUserAgent());
+	}
+	
+	private Map<String, String> envMaps;
+	
+	public void putEnv(String key, String value){
+		envMaps.put(key, value);
+	}
+	
+	public String getEnv(String key){
+		return envMaps.get(key);
+	}
+	
+	public Set<String> getKeyEnv(){
+		return envMaps.keySet();
+	}
+	
+	public static native String getUserAgent() /*-{
+	return navigator.userAgent.toLowerCase();
+	}-*/;
 }

@@ -21,21 +21,35 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.test;
 
-import static org.junit.Assert.*;
+import com.google.gwt.event.shared.SimpleEventBus;
+import com.keraton.bbcmd.client.test.event.TestEvent;
+import com.keraton.bbcmd.client.test.event.TestHandler;
 
-import org.junit.Test;
+public abstract class GWUnit implements TestHandler {
+	
+	private final SimpleEventBus bus;
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+	public GWUnit(SimpleEventBus bus) {
+		this.bus = bus;
 	}
 
+	public void onTest(TestEvent event) {
+		Info info = new Info();
+		before();
+		try {
+			test(info);
+		}
+		catch(Exception e) {
+			// TODO ex. bus.fire... 
+		}
+		after();
+	}
+	
+	protected abstract void test(Info info);
+
+	protected void before() {}
+	protected void after() {}
+	
 }

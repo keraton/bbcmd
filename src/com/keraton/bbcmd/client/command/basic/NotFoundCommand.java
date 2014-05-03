@@ -21,21 +21,37 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.command.basic;
 
-import static org.junit.Assert.*;
+import com.google.gwt.core.shared.GWT;
+import com.keraton.bbcmd.client.command.share.Commandable;
+import com.keraton.bbcmd.client.command2ui.ExecutableRegistry;
+import com.keraton.bbcmd.client.common.message.MainMessage;
 
-import org.junit.Test;
+public class NotFoundCommand implements Commandable {
+	
+	public final static String KEY = "notfound";
+	
+	private static MainMessage MESSAGE = GWT.create(MainMessage.class);
+	private String notCmd;
+	
+	public void setNotFoundCmd(String cmd){
+		this.notCmd = cmd;
+	}
+	
+	@Override
+	public String getKey() {
+		return KEY;
+	}
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
+	@Override
+	public void doCommand(String args) {
+		ExecutableRegistry.getExecutable().printErr(getNotfoundCommandText(notCmd));
 		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+	}
+
+	protected String getNotfoundCommandText(String command) {
+		return MESSAGE.command_not_found(command);
 	}
 
 }

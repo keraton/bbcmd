@@ -21,21 +21,25 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.server;
 
-import static org.junit.Assert.*;
+import java.io.IOException;
 
-import org.junit.Test;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
+@SuppressWarnings("serial")
+public class TestServiceServlet extends HttpServlet {
 
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+		String value = (String) req.getParameter("value");
+		resp.getWriter().write("value=" + value);
 	}
 
+	
 }

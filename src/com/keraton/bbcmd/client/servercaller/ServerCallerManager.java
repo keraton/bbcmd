@@ -21,21 +21,27 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.servercaller;
 
-import static org.junit.Assert.*;
+import com.google.gwt.event.shared.SimpleEventBus;
+import com.keraton.bbcmd.client.servercaller.event.ServerCommandEvent;
+import com.keraton.bbcmd.client.servercaller.event.ServerCommandHandler;
 
-import org.junit.Test;
-
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
+public class ServerCallerManager {
+	
+	private final HTTPServerCallerImpl serverCallerImpl;
+	
+	public ServerCallerManager(SimpleEventBus bus) {
 		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+		serverCallerImpl = new HTTPServerCallerImpl();
+		
+		bus.addHandler(ServerCommandEvent.TYPE, new ServerCommandHandler() {
+			
+			@Override
+			public void onCommand(ServerCommandEvent event) {
+				serverCallerImpl.send(event.getData(), event.getCallback());
+			}
+		});
 	}
 
 }

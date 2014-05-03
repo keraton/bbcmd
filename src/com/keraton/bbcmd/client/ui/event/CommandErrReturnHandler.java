@@ -21,21 +21,12 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.ui.event;
 
-import static org.junit.Assert.*;
+import com.google.gwt.event.shared.EventHandler;
 
-import org.junit.Test;
+public interface CommandErrReturnHandler extends EventHandler {
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
-	}
-
+	void onRetour(String text);
+	
 }

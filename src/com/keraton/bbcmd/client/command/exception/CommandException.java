@@ -21,21 +21,14 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.command.exception;
 
-import static org.junit.Assert.*;
+public class CommandException extends Exception {
 
-import org.junit.Test;
-
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+	private static final long serialVersionUID = 1L;
+	
+	public CommandException(String message) {
+		super(message);
 	}
 
 }

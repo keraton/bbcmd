@@ -21,21 +21,25 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.command.stack;
 
-import static org.junit.Assert.*;
+import com.google.gwt.event.shared.SimpleEventBus;
+import com.google.gwt.http.client.RequestBuilder.Method;
 
-import org.junit.Test;
+public class ConfigurableServerStack extends AbstractServerStack {
+	
+	private final Method method;
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
+	// TODO change this into GetServerStackParameter
+	public ConfigurableServerStack(String key, String urlPath,
+			String description, SimpleEventBus bus, Method method) {
+		super(key, urlPath, description, bus);
+		this.method = method;
+	}
 
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+	@Override
+	protected Method getMethod() {
+		return method;
 	}
 
 }

@@ -21,21 +21,22 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.command2ui;
 
-import static org.junit.Assert.*;
+public class ExecutableRegistry {
+	
+	private ExecutableRegistry(){}
 
-import org.junit.Test;
-
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+	private static Executable executable;
+	
+	public static void setExecutable(Executable executable){
+		if(null != ExecutableRegistry.executable) {
+			throw new IllegalStateException("Only one executable");
+		}
+		ExecutableRegistry.executable = executable;
 	}
-
+	
+	public static Executable getExecutable() {
+		return executable;
+	}
 }

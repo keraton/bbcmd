@@ -21,21 +21,31 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.init;
 
-import static org.junit.Assert.*;
+import com.google.gwt.event.shared.SimpleEventBus;
 
-import org.junit.Test;
-
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+public class InitializerFactory {
+	
+	private static InitializerFactory instance = new InitializerFactory();
+	private Initializer initializer;
+	
+	public static InitializerFactory getInstance() {
+		return instance;
+	}
+	
+	private InitializerFactory() {
+	}
+	
+	public InitInfo init(SimpleEventBus bus) {
+		if (null == initializer) {
+			initializer = new JSInitializer(bus);
+		}
+		return initializer.getInitInfo();
+	}
+	
+	public void buildServerStack() {
+		initializer.buildServerStack();
 	}
 
 }

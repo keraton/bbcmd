@@ -21,21 +21,18 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.test;
 
-import static org.junit.Assert.*;
+public class Info {
 
-import org.junit.Test;
+	private String testDesc;
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+	public final String getTestDesc() {
+		return testDesc;
 	}
 
+	public final void setTestDesc(String testDesc) {
+		this.testDesc = testDesc;
+	}
+	
 }

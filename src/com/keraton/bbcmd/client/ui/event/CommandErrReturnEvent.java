@@ -21,21 +21,33 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.ui.event;
 
-import static org.junit.Assert.*;
+import com.google.gwt.event.shared.GwtEvent;
 
-import org.junit.Test;
-
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+public class CommandErrReturnEvent extends GwtEvent<CommandErrReturnHandler> {
+	
+	public final static Type<CommandErrReturnHandler> TYPE = new Type<CommandErrReturnHandler>();
+	
+	private String text;
+	
+	public CommandErrReturnEvent(String text){
+		this.text = text;
 	}
+	
+	public CommandErrReturnEvent(String text, String newStack){
+		this.text = text;
+	}
+
+	@Override
+	public com.google.gwt.event.shared.GwtEvent.Type<CommandErrReturnHandler> getAssociatedType() {
+		return TYPE;
+	}
+
+	@Override
+	protected void dispatch(CommandErrReturnHandler handler) {
+		handler.onRetour(text);
+	}
+
 
 }

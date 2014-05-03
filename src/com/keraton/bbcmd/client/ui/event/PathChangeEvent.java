@@ -21,21 +21,28 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.ui.event;
 
-import static org.junit.Assert.*;
+import com.google.gwt.event.shared.GwtEvent;
 
-import org.junit.Test;
+public class PathChangeEvent extends GwtEvent<PathChangeHandler> {
+	
+	public final static Type<PathChangeHandler> TYPE = new Type<PathChangeHandler>();
+	
+	private String newPath;
+	
+	public PathChangeEvent(String newPath){
+		this.newPath = newPath;
+	}
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
+	@Override
+	public com.google.gwt.event.shared.GwtEvent.Type<PathChangeHandler> getAssociatedType() {
+		return TYPE;
+	}
 
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+	@Override
+	protected void dispatch(PathChangeHandler handler) {
+		handler.onPathChange(newPath);
 	}
 
 }

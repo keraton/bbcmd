@@ -21,21 +21,18 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.command.stack.js;
 
-import static org.junit.Assert.*;
+import com.keraton.bbcmd.client.command2ui.ExecutableRegistry;
 
-import org.junit.Test;
+public class JSUtility {
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
-	}
+    public static void printGWT(String toPrint) { 
+    	ExecutableRegistry.getExecutable().print(toPrint);
+    }
+    
+    public static native void exportStaticMethod() /*-{
+		$wnd.printGWT = $entry(@com.keraton.bbcmd.client.command.stack.js.JSUtility::printGWT(Ljava/lang/String;));
+	}-*/;
 
 }

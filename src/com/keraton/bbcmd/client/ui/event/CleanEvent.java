@@ -21,21 +21,28 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.ui.event;
 
-import static org.junit.Assert.*;
+import com.google.gwt.event.shared.GwtEvent;
 
-import org.junit.Test;
-
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+public class CleanEvent extends GwtEvent<CleanHandler> {
+	
+	public final static Type<CleanHandler> TYPE = new Type<CleanHandler>();
+	
+	
+	public CleanEvent(){
 	}
+	
+
+	@Override
+	public com.google.gwt.event.shared.GwtEvent.Type<CleanHandler> getAssociatedType() {
+		return TYPE;
+	}
+
+	@Override
+	protected void dispatch(CleanHandler handler) {
+		handler.onClean();
+	}
+
 
 }

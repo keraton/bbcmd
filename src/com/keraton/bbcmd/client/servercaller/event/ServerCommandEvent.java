@@ -21,21 +21,40 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.servercaller.event;
 
-import static org.junit.Assert.*;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.http.client.RequestCallback;
+import com.keraton.bbcmd.client.servercaller.data.RequestData;
 
-import org.junit.Test;
+public class ServerCommandEvent extends GwtEvent<ServerCommandHandler> {
+	
+	public final static Type<ServerCommandHandler> TYPE = new Type<ServerCommandHandler>();
+	
+	private final RequestData data;
+	private final RequestCallback callback;
+	
+	public ServerCommandEvent(RequestData data, RequestCallback callback) {
+		this.data = data;
+		this.callback = callback;
+	}
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
+	@Override
+	public com.google.gwt.event.shared.GwtEvent.Type<ServerCommandHandler> getAssociatedType() {
+		return TYPE;
+	}
 
-public class StringUtilsTest {
+	@Override
+	protected void dispatch(ServerCommandHandler handler) {
+		handler.onCommand(this);
+	}
 
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+	public final RequestData getData() {
+		return data;
+	}
+
+	public final RequestCallback getCallback() {
+		return callback;
 	}
 
 }

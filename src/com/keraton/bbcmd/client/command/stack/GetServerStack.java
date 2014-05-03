@@ -21,21 +21,29 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.command.stack;
 
-import static org.junit.Assert.*;
+import com.google.gwt.core.shared.GWT;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestBuilder.Method;
+import com.google.gwt.http.client.URL;
+import com.keraton.bbcmd.client.servercaller.data.RequestData;
 
-import org.junit.Test;
+public class GetServerStack extends AbstractServerStack {
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
+	public GetServerStack(GetServerStackParameter parameterObject) {
+		super(parameterObject.key, parameterObject.urlPath, parameterObject.description, parameterObject.bus);
+	}
 
-public class StringUtilsTest {
+	@Override
+	protected Method getMethod() {
+		return RequestBuilder.GET;
+	}
 
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+	@Override
+	protected RequestData createRequest(String args) {
+		GWT.log("args : " + args);
+		return new RequestData(getMethod(), urlPath + URL.encodePathSegment(args) , args);
 	}
 
 }

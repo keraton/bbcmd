@@ -21,21 +21,13 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.servercaller;
 
-import static org.junit.Assert.*;
+import com.google.gwt.http.client.RequestCallback;
+import com.keraton.bbcmd.client.servercaller.data.RequestData;
 
-import org.junit.Test;
-
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
-	}
+public interface ServerCaller {
+	
+	void send(RequestData request, RequestCallback callback);
 
 }

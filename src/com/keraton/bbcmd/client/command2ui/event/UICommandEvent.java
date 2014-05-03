@@ -21,21 +21,28 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.command2ui.event;
 
-import static org.junit.Assert.*;
+import com.google.gwt.event.shared.GwtEvent;
 
-import org.junit.Test;
+public class UICommandEvent extends GwtEvent<UICommandHandler> {
+	
+	public final static Type<UICommandHandler> TYPE = new Type<UICommandHandler>();
+	
+	private String text;
+	
+	public UICommandEvent(String text) {
+		this.text = text;
+	}
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
+	@Override
+	public com.google.gwt.event.shared.GwtEvent.Type<UICommandHandler> getAssociatedType() {
+		return TYPE;
+	}
 
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+	@Override
+	protected void dispatch(UICommandHandler handler) {
+		handler.onCommand(text);
 	}
 
 }

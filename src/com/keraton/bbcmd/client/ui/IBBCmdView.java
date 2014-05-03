@@ -21,21 +21,41 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.ui;
 
-import static org.junit.Assert.*;
+import com.google.gwt.dom.client.Element;
 
-import org.junit.Test;
 
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+public interface IBBCmdView {
+	
+	public interface Presenter {
+		void init();
+		void onSubmit();
+		void onUp();
+		void onDown();
+		void onTabInput();
 	}
 
+	void addText(String text);
+	
+	void addErrText(String err);
+	
+	void init();
+	
+	String getCmdText();
+	
+	Element getElement();
+	
+	void setCmdText(String text);
+	
+	void setPath(String stack);
+	
+	void setPresenter(Presenter presenter);
+
+	void clean();
+
+	void setSymbol(String symbol);
+
+	void setTextFromInputCmd();
+	
 }

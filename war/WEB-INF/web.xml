@@ -35,7 +35,7 @@
   
    <servlet>
     <servlet-name>TestServiceServlet</servlet-name>
-    <servlet-class>com.bbro.bbcmd.server.TestServiceServlet</servlet-class>
+    <servlet-class>com.keraton.bbcmd.server.TestServiceServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -45,7 +45,7 @@
   
   <servlet>
     <servlet-name>MathJServiceServlet</servlet-name>
-    <servlet-class>com.bbro.bbcmd.server.MathJServiceServlet</servlet-class>
+    <servlet-class>com.keraton.bbcmd.server.MathJServiceServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>

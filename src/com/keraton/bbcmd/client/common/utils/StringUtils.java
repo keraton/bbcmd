@@ -21,21 +21,27 @@
  *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *	SOFTWARE.
  */
-package  com.bbro.bbcmd.client.utils;
+package  com.keraton.bbcmd.client.common.utils;
 
-import static org.junit.Assert.*;
+public class StringUtils {
 
-import org.junit.Test;
-
-import com.keraton.bbcmd.client.common.utils.StringUtils;
-
-public class StringUtilsTest {
-
-	@Test
-	public void test() {
-		assertEquals("123", StringUtils.regroupArgs("1","2","3"));
-		
-		assertEquals("12", StringUtils.regroupArgs("12"));
+	public static String regroupArgs(String...args) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < args.length; i++) {
+			sb.append(args[i]);
+		}
+		return sb.toString();
 	}
-
+	
+	public static String reconstructArgs(String...args) {
+		String result = "";
+		for (String string : args) {
+			result += string + " ";
+		}
+		return result;
+	}
+	
+	public static String regroupCommandAndArgs(String cmd, String args){
+		return (cmd + (args == null || args.isEmpty() ? "" : " " + args)).trim();
+	}
 }
