@@ -1,2 +1,0 @@
-serviceClass: com.bbro.bbcmd.client.GreetingService
-path: E789056F1BA6BB7195AB8EA91BA4DE9C.gwt.rpc

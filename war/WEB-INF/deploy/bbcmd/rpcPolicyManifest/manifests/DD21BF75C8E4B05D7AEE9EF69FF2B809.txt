@@ -1,2 +1,0 @@
-serviceClass: com.bbro.bbcmd.client.core.CommandServerService
-path: 5605F371B0CC5FFA2D215C642DA5950C.gwt.rpc
