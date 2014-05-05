@@ -23,14 +23,18 @@
  */
 package  com.keraton.bbcmd.client.init;
 
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.keraton.bbcmd.client.command.basic.ErrCommand;
 import com.keraton.bbcmd.client.command.share.Commandable;
+import com.keraton.bbcmd.client.command.stack.AbstractServerStack;
 import com.keraton.bbcmd.client.command.stack.ClientStack;
 import com.keraton.bbcmd.client.command.stack.GetServerStack;
-import com.keraton.bbcmd.client.command.stack.GetServerStackParameter;
+import com.keraton.bbcmd.client.command.stack.PostServerStack;
+import com.keraton.bbcmd.client.command.stack.ServerStackParameter;
 import com.keraton.bbcmd.client.command2ui.event.CommandEvent;
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
+import com.keraton.bbcmd.client.common.utils.StringUtils;
+import com.keraton.bbcmd.client.common.utils.CommandDTO.Source;
 
 public class JSInitializer implements Initializer {
 	
@@ -43,26 +47,37 @@ public class JSInitializer implements Initializer {
 	
 	public void buildServerStack() {
 		
-//		try {
-			GWT.log("****");
+		try {
 			int commandNumber = JSInitializerUtils.getCommandsSize();
-			GWT.log(""+ commandNumber);
-			for(int i=0; i<commandNumber; i++) {
-				GetServerStackParameter parameter = new GetServerStackParameter();
+			for(int index=0; index<commandNumber; index++) {
+				ServerStackParameter parameter = new ServerStackParameter();
 				parameter.setBus(bus);
-				parameter.setDescription(JSInitializerUtils.getDescription(i));
-				parameter.setKey(JSInitializerUtils.getKey(i));
-				parameter.setUrlPath(JSInitializerUtils.getUrlPath(i));
+				parameter.setDescription(JSInitializerUtils.getDescription(index));
+				parameter.setKey(JSInitializerUtils.getKey(index));
+				parameter.setUrlPath(JSInitializerUtils.getUrlPath(index));
 				
-				GetServerStack getServerStack = new GetServerStack(parameter);
-				ClientStack.getINSTANCE().addCommand(getServerStack);
+				AbstractServerStack serverStack = null;
+				
+				String defaultCommand = JSInitializerUtils.getMethod(index);
+				if("POST".equalsIgnoreCase(defaultCommand)) {
+					serverStack = new PostServerStack(parameter);
+				}
+				else {
+					// Default server stack => Get
+					serverStack = new GetServerStack(parameter);
+				}
+				
+				ClientStack.getINSTANCE().addCommand(serverStack);
 				
 			}
-//		}
-//		catch(Exception exception) {
-//			GWT.log(exception.getMessage(), exception);
-//			bus.fireEvent(new CommandEvent(exception.getMessage(), errCommand));
-//		}
+		}
+		catch(Exception exception) {
+			String text = exception.getMessage();
+			CommandDTO command = new CommandDTO(errCommand.getKey(), text,
+					StringUtils.regroupCommandAndArgs(errCommand.getKey(), text), 
+					Source.SERVER);
+			bus.fireEvent(new CommandEvent(command, errCommand));
+		}
 		
 	}
 	
@@ -75,8 +90,6 @@ public class JSInitializer implements Initializer {
 		initInfo.setDomId(JSInitializerUtils.getId());
 		initInfo.setHeight(JSInitializerUtils.getHeight());
 		initInfo.setWidth(JSInitializerUtils.getWidth());
-		
-		GWT.log("Info OK");
 		
 		return initInfo;
 	}
@@ -111,6 +124,15 @@ public class JSInitializer implements Initializer {
 			return false;
 		}-*/;
 		
+		private static native String getDefaultCommand() /*-{
+			if ($wnd.bbcmdObj && $wnd.bbcmdObj.defaultCmd) {
+				return $wnd.bbcmdObj.defaultCmd;
+			}
+			return null;
+		}-*/;
+		
+		// =========== COMMAND INFO
+		
 		private static native int getCommandsSize()  /*-{
 			if ($wnd.bbcmdObj && $wnd.bbcmdObj.commands) {
 				return $wnd.bbcmdObj.commands.length;
@@ -133,6 +155,12 @@ public class JSInitializer implements Initializer {
 		private static native String getDescription(int index) /*-{
 			if ($wnd.bbcmdObj.commands[index].description)
 				return $wnd.bbcmdObj.commands[index].description;
+			return null;
+		}-*/;
+		
+		private static native String getMethod(int index) /*-{
+			if ($wnd.bbcmdObj.commands[index].method)
+				return $wnd.bbcmdObj.commands[index].method;
 			return null;
 		}-*/;
 	}

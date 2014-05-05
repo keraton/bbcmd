@@ -28,6 +28,7 @@ import java.util.Date;
 import com.keraton.bbcmd.client.command.exception.CommandException;
 import com.keraton.bbcmd.client.command.share.Commandable;
 import com.keraton.bbcmd.client.command2ui.ExecutableRegistry;
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
 
 public class DateCommand implements Commandable {
 	
@@ -39,7 +40,7 @@ public class DateCommand implements Commandable {
 	}
 
 	@Override
-	public void doCommand(String args) throws CommandException {
+	public void doCommand(CommandDTO command) throws CommandException {
 		ExecutableRegistry.getExecutable().print("" + new Date());
 	}
 

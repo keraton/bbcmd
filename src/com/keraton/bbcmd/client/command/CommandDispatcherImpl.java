@@ -25,15 +25,15 @@ package  com.keraton.bbcmd.client.command;
 
 import java.util.Stack;
 
+import com.keraton.bbcmd.client.command.basic.EmptyCommand;
 import com.keraton.bbcmd.client.command.basic.NotFoundCommand;
 import com.keraton.bbcmd.client.command.exception.CommandException;
 import com.keraton.bbcmd.client.command.exception.IllegalOptionCommandException;
 import com.keraton.bbcmd.client.command.share.Commandable;
-import com.keraton.bbcmd.client.command.share.Directable;
 import com.keraton.bbcmd.client.command.share.ExitCommandable;
 import com.keraton.bbcmd.client.command.share.Stackable;
 import com.keraton.bbcmd.client.command2ui.ExecutableRegistry;
-import com.keraton.bbcmd.client.common.utils.StringUtils;
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
 
 public final class CommandDispatcherImpl implements CommandDispatcher {
 		
@@ -41,55 +41,58 @@ public final class CommandDispatcherImpl implements CommandDispatcher {
 	
 	private Stack<Stackable> stacks = new Stack<Stackable>();
 	private NotFoundCommand notFound = new NotFoundCommand();
+	private EmptyCommand emptyCommand = new EmptyCommand();
 	
 	
 	public CommandDispatcherImpl(Stackable mainStack) {
 		this.mainStack = mainStack;
 	}
 	
-	public void dispatch(String command, String args) {
+	public void dispatch(CommandDTO commandDTO) {
 		
 		Commandable realCommand = null;
 		
-		if (mainStack instanceof Directable) {
-			args = StringUtils.regroupCommandAndArgs(command, args);
-		}
-		
-		realCommand = mainStack.getCommands(command);
+		realCommand = mainStack.getCommands(commandDTO);
 			
 		if (realCommand == null) {
-			notFound.setNotFoundCmd(command);
 			realCommand = notFound;
 		} 
 		
-		dispatch(realCommand, args);
+		dispatch(realCommand, commandDTO);
 		
 	}
 
 	@Override
-	public void dispatch(Commandable command, String args) {
+	public void dispatch(Commandable command, CommandDTO commandDTO) {
+		Commandable executeCommand = command;
 			
-		if (command instanceof Stackable
-				&& (args == null || args.isEmpty())) {
-			stacks.push(mainStack);
-			mainStack = (Stackable) command;
-			ExecutableRegistry.getExecutable().printPath(mainStack.getKey());
+		if (executeCommand instanceof Stackable
+				&& mainStack != executeCommand) {
+			if (commandDTO.getArgs() == null || commandDTO.getArgs().isEmpty()) {
+				stacks.push(mainStack);
+				mainStack = (Stackable) command;
+				ExecutableRegistry.getExecutable().printPath(mainStack.getKey());
+				executeCommand = emptyCommand;
+			}
+			else {
+				commandDTO = new CommandDTO(commandDTO.getCommand(), 
+						commandDTO.getArgs(), commandDTO.getArgs(), commandDTO.getSource());
+			}
 		}
 		
-		if (command instanceof ExitCommandable) {
+		if (executeCommand instanceof ExitCommandable) {
 			if (stacks.size() > 0 ) {
 				mainStack = stacks.pop();
 				ExecutableRegistry.getExecutable().printPath(mainStack.getKey());
 			}
 		}
-		
 			
 		try {
-			command.doCommand(args);
+			executeCommand.doCommand(commandDTO);
 		}
 		catch (IllegalOptionCommandException e) {
 			StringBuilder sb = new StringBuilder();
-			sb.append(command.getKey());
+			sb.append(executeCommand.getKey());
 			sb.append(" : illegal option");
 			sb.append("<br/>");
 			ExecutableRegistry.getExecutable().printErr(sb.toString());

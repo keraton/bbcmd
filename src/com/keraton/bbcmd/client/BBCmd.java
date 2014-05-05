@@ -35,6 +35,7 @@ import com.keraton.bbcmd.client.command2ui.ExecutableRegistry;
 import com.keraton.bbcmd.client.init.InitInfo;
 import com.keraton.bbcmd.client.init.InitializerFactory;
 import com.keraton.bbcmd.client.servercaller.ServerCallerManager;
+import com.keraton.bbcmd.client.ui.BBCmdJSInput;
 import com.keraton.bbcmd.client.ui.BBCmdPresenter;
 import com.keraton.bbcmd.client.ui.BasicCmdView;
 import com.keraton.bbcmd.client.ui.IBBCmdView;
@@ -65,6 +66,7 @@ public class BBCmd implements EntryPoint {
 		// Init UI
 		IBBCmdView view = new BasicCmdView();
 		BBCmdPresenter presenter = new BBCmdPresenter(view, bus);
+		BBCmdJSInput.init(bus);
 		
 		// Init Server Caller
 		new ServerCallerManager(bus);

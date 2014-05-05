@@ -24,11 +24,12 @@
 package  com.keraton.bbcmd.client.command;
 
 import com.keraton.bbcmd.client.command.share.Commandable;
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
 
 public interface CommandDispatcher {
 
-	void dispatch(String command, String args);
-	
-	void dispatch(Commandable command, String args);
+	void dispatch(CommandDTO commandDTO);
 
+	void dispatch(Commandable command, CommandDTO commandDTO);
+	
 }

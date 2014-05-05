@@ -24,15 +24,16 @@
 package  com.keraton.bbcmd.client.command2ui.event;
 
 import com.google.gwt.event.shared.GwtEvent;
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
 
 public class UICommandEvent extends GwtEvent<UICommandHandler> {
 	
 	public final static Type<UICommandHandler> TYPE = new Type<UICommandHandler>();
 	
-	private String text;
+	private final CommandDTO commandDTO;
 	
-	public UICommandEvent(String text) {
-		this.text = text;
+	public UICommandEvent(CommandDTO commandDTO) {
+		this.commandDTO = commandDTO;
 	}
 
 	@Override
@@ -42,7 +43,11 @@ public class UICommandEvent extends GwtEvent<UICommandHandler> {
 
 	@Override
 	protected void dispatch(UICommandHandler handler) {
-		handler.onCommand(text);
+		handler.onCommand(this);
+	}
+
+	public final CommandDTO getCommandDTO() {
+		return commandDTO;
 	}
 
 }

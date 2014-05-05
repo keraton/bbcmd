@@ -29,7 +29,7 @@ import com.keraton.bbcmd.client.command2ui.event.CommandEvent;
 import com.keraton.bbcmd.client.command2ui.event.CommandHandler;
 import com.keraton.bbcmd.client.command2ui.event.UICommandEvent;
 import com.keraton.bbcmd.client.command2ui.event.UICommandHandler;
-import com.keraton.bbcmd.client.common.utils.StringUtils;
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
 import com.keraton.bbcmd.client.ui.event.CleanEvent;
 import com.keraton.bbcmd.client.ui.event.CommandErrReturnEvent;
 import com.keraton.bbcmd.client.ui.event.CommandReturnEvent;
@@ -47,19 +47,10 @@ public class Command2UI implements Executable {
 		bus.addHandler(UICommandEvent.TYPE, new UICommandHandler() {
 			
 			@Override
-			public void onCommand(String text) {
-				
-				// Do some => Translation
-				String[] args = text.split(" ");
-				String[] argsCmd = null;
-				if(args.length > 0) {
-					argsCmd = new String[args.length-1];
-					for (int i = 1; i < args.length; i++) {
-						argsCmd[i-1] = args[i];
-					}
-				}
+			public void onCommand(UICommandEvent event) {
+				CommandDTO command = event.getCommandDTO();
 				// Bridge
-				dispatcher.dispatch(args[0], StringUtils.reconstructArgs(argsCmd));
+				dispatcher.dispatch(command);
 			}
 		});
 		
@@ -68,7 +59,7 @@ public class Command2UI implements Executable {
 			
 			@Override
 			public void onCommand(CommandEvent event) {
-				dispatcher.dispatch(event.getCommandable(), event.getText());
+				dispatcher.dispatch(event.getCommandable(), event.getCommandDTO());
 			}
 		});
 		

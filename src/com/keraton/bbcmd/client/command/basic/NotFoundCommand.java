@@ -27,17 +27,13 @@ import com.google.gwt.core.shared.GWT;
 import com.keraton.bbcmd.client.command.share.Commandable;
 import com.keraton.bbcmd.client.command2ui.ExecutableRegistry;
 import com.keraton.bbcmd.client.common.message.MainMessage;
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
 
 public class NotFoundCommand implements Commandable {
 	
 	public final static String KEY = "notfound";
 	
 	private static MainMessage MESSAGE = GWT.create(MainMessage.class);
-	private String notCmd;
-	
-	public void setNotFoundCmd(String cmd){
-		this.notCmd = cmd;
-	}
 	
 	@Override
 	public String getKey() {
@@ -45,8 +41,8 @@ public class NotFoundCommand implements Commandable {
 	}
 
 	@Override
-	public void doCommand(String args) {
-		ExecutableRegistry.getExecutable().printErr(getNotfoundCommandText(notCmd));
+	public void doCommand(CommandDTO command) {
+		ExecutableRegistry.getExecutable().printErr(getNotfoundCommandText(command.getCommand()));
 		
 	}
 

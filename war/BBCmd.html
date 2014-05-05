@@ -26,14 +26,15 @@
     <script type="text/javascript" language="javascript" src="bbcmd/bbcmd.nocache.js"></script>
     <script>
         bbcmdObj = {
-        		id		:"bbcmd_id",
-        		width 	: 600,
-        		height 	: 400,
-        		useBody : true,
-        		commands : [
-        		            {key:"test", description:"test description", urlPath:"test?value="},
-        		            {key:"mathj", description:"MathJ equation test", urlPath:"mathj?value="}
-        		            ]
+        		id			:"bbcmd_id",
+        		width 		: 600,
+        		height 		: 400,
+        		useBody 	: true,
+        		defaultCmd 	: "mathj",
+	        	commands	: [
+	        		            {key:"test", description:"test description", method: "POST", urlPath:"test"},
+	        		            {key:"mathj", description:"MathJ equation test", methotd: "GET", urlPath:"mathj?value="}
+	        		           ]
         		}; 
 	</script>
   </head>

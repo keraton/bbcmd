@@ -26,6 +26,7 @@ package  com.keraton.bbcmd.client.command.basic;
 import com.keraton.bbcmd.client.command.exception.CommandException;
 import com.keraton.bbcmd.client.command.share.Commandable;
 import com.keraton.bbcmd.client.command2ui.ExecutableRegistry;
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
 
 public class EchoCommand implements Commandable {
 	
@@ -37,8 +38,8 @@ public class EchoCommand implements Commandable {
 	}
 
 	@Override
-	public void doCommand(String args) throws CommandException {
-		ExecutableRegistry.getExecutable().print(args);
+	public void doCommand(CommandDTO command) throws CommandException {
+		ExecutableRegistry.getExecutable().print(command.getArgs());
 	}
 
 }

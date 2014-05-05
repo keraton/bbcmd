@@ -24,6 +24,7 @@
 package  com.keraton.bbcmd.client.command.basic;
 
 import com.keraton.bbcmd.client.command.share.Commandable;
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
 
 public class EmptyCommand implements Commandable {
 
@@ -35,7 +36,7 @@ public class EmptyCommand implements Commandable {
 	}
 
 	@Override
-	public void doCommand(String args) {
+	public void doCommand(CommandDTO command) {
 	}
 
 }

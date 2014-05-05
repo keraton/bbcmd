@@ -24,6 +24,7 @@
 package  com.keraton.bbcmd.server;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -51,25 +52,35 @@ public class MathJServiceServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String value = (String) req.getParameter("value");
-		//+ => %252B
-		// / => %252F
 		value = value.replaceAll("%2B", "+");
 		value = value.replaceAll("%2F", "/");
 		value = value.replaceAll("%3D", "=");
 		
+		apply(req, resp, value);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		
+		String value = ReaderUtils.getBody(req);
+		apply(req, resp, value);
+	}
+
+	private void apply(HttpServletRequest req, HttpServletResponse resp,
+			String value) throws IOException {
 		FunctionReader reader = new FunctionStringReader();
 		try {
-			Context context = getContext(req);
-			
-			MathJ mathJ = new MathJ(context);
+			MathJ mathJ = getContext(req);
 			
 			if (value.indexOf("=") > -1) {
-				treatSet(resp, value, reader, context, mathJ);
+				treatSet(resp, value, reader, mathJ);
 			}
 			else {
 				Function func = reader.read(value.trim());
 				resp.getWriter().write("" + mathJ.apply(func).value());
 			}
+			
 		} catch (SyntaxException e) {
 			resp.sendError(HttpServletResponse.SC_EXPECTATION_FAILED, e.getMessage());
 		} catch (ValidationReaderException e) {
@@ -77,17 +88,17 @@ public class MathJServiceServlet extends HttpServlet {
 		}
 	}
 
-	private Context getContext(HttpServletRequest req) {
+	private MathJ getContext(HttpServletRequest req) {
 		if (null == req.getSession().getAttribute("context")) {
-			Context context = new MapContext();
-			req.getSession().setAttribute("context", context);
+			req.getSession().setAttribute("context", new MapContext());
 		}
-		Context context = (Context) req.getSession().getAttribute("context");
-		return context;
+		MapContext mapContext= (MapContext) req.getSession().getAttribute("context");
+		MathJ mathj = new MathJ(mapContext);
+		return mathj;
 	}
 
 	private void treatSet(HttpServletResponse resp, String value,
-			FunctionReader reader, Context context, MathJ mathJ)
+			FunctionReader reader, MathJ mathJ)
 			throws IOException, ValidationReaderException, SyntaxException {
 		String[] values = value.split("=");
 		if (values.length > 2 || values.length < 2 ) {
@@ -100,7 +111,7 @@ public class MathJServiceServlet extends HttpServlet {
 			Lexer lex = new Lexer(variable);
 			Lexeme lexeme = lex.nextLexeme();
 			if (lexeme.getType() == Type.VAR) {
-				context.setContext(lexeme.getToken(), reader.read(equation));
+				mathJ.setContext(lexeme.getToken(), reader.read(equation));
 			}
 			else if (lexeme.getType() == Type.CONST) {
 				int expected = Integer.parseInt(variable);

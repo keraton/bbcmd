@@ -24,11 +24,12 @@
 package  com.keraton.bbcmd.client.command.share;
 
 import com.keraton.bbcmd.client.command.exception.CommandException;
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
 
 public interface Commandable {
 	
 	String getKey();
 	
-	void doCommand(String arg) throws CommandException;
+	void doCommand(CommandDTO command) throws CommandException;
 
 }

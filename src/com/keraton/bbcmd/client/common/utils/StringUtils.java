@@ -23,6 +23,8 @@
  */
 package  com.keraton.bbcmd.client.common.utils;
 
+import com.keraton.bbcmd.client.common.utils.CommandDTO.Source;
+
 public class StringUtils {
 
 	public static String regroupArgs(String...args) {
@@ -39,6 +41,18 @@ public class StringUtils {
 			result += string + " ";
 		}
 		return result;
+	}
+	
+	public static CommandDTO createCommandsArgs(String text, Source source) {
+		String[] args = text.split(" ");
+		String[] argsCmd = null;
+		if(args.length > 0) {
+			argsCmd = new String[args.length-1];
+			for (int i = 1; i < args.length; i++) {
+				argsCmd[i-1] = args[i];
+			}
+		}
+		return new CommandDTO(args[0], reconstructArgs(argsCmd), text, source);
 	}
 	
 	public static String regroupCommandAndArgs(String cmd, String args){

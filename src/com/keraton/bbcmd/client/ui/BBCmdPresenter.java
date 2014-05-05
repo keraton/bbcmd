@@ -27,6 +27,8 @@ import java.util.LinkedList;
 
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.keraton.bbcmd.client.command2ui.event.UICommandEvent;
+import com.keraton.bbcmd.client.common.utils.StringUtils;
+import com.keraton.bbcmd.client.common.utils.CommandDTO.Source;
 import com.keraton.bbcmd.client.ui.IBBCmdView.Presenter;
 import com.keraton.bbcmd.client.ui.event.CleanEvent;
 import com.keraton.bbcmd.client.ui.event.CleanHandler;
@@ -43,7 +45,6 @@ public class BBCmdPresenter implements Presenter{
 	private IBBCmdView view;
 	private LinkedList<String> commands = new LinkedList<String>();
 	private int commandIndex = 0;
-	private String path = "";
 	private String tempText = "";
 	
 	public BBCmdPresenter(final IBBCmdView view, SimpleEventBus bus) {
@@ -74,7 +75,6 @@ public class BBCmdPresenter implements Presenter{
 			@Override
 			public void onPathChange(String newPath) {
 				view.setPath(newPath);
-				path = newPath;
 			}
 		});
 		
@@ -103,7 +103,7 @@ public class BBCmdPresenter implements Presenter{
 			commands.addFirst(tempText);
 			commandIndex = 0;
 	
-			bus.fireEvent(new UICommandEvent(tempText));
+			bus.fireEvent(new UICommandEvent(StringUtils.createCommandsArgs(text, Source.CMD)));
 			tempText = "";
 		}
 	}

@@ -23,7 +23,6 @@
  */
 package  com.keraton.bbcmd.client.command.stack;
 
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestBuilder.Method;
 import com.google.gwt.http.client.URL;
@@ -31,7 +30,7 @@ import com.keraton.bbcmd.client.servercaller.data.RequestData;
 
 public class GetServerStack extends AbstractServerStack {
 
-	public GetServerStack(GetServerStackParameter parameterObject) {
+	public GetServerStack(ServerStackParameter parameterObject) {
 		super(parameterObject.key, parameterObject.urlPath, parameterObject.description, parameterObject.bus);
 	}
 
@@ -42,7 +41,6 @@ public class GetServerStack extends AbstractServerStack {
 
 	@Override
 	protected RequestData createRequest(String args) {
-		GWT.log("args : " + args);
 		return new RequestData(getMethod(), urlPath + URL.encodePathSegment(args) , args);
 	}
 

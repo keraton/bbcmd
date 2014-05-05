@@ -41,5 +41,14 @@ public class TestServiceServlet extends HttpServlet {
 		resp.getWriter().write("value=" + value);
 	}
 
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		
+		String value = ReaderUtils.getBody(req);
+		resp.getWriter().write("value=" + value);
+	}
+
+	
 	
 }

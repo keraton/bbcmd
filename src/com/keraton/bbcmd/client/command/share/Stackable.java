@@ -23,10 +23,12 @@
  */
 package  com.keraton.bbcmd.client.command.share;
 
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
+
 
 
 
 public interface Stackable extends Commandable {
 
-	Commandable getCommands(String key);
+	Commandable getCommands(CommandDTO commandDTO);
 }

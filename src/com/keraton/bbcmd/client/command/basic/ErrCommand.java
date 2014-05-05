@@ -26,10 +26,11 @@ package  com.keraton.bbcmd.client.command.basic;
 import com.keraton.bbcmd.client.command.exception.CommandException;
 import com.keraton.bbcmd.client.command.share.Commandable;
 import com.keraton.bbcmd.client.command2ui.ExecutableRegistry;
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
 
 public class ErrCommand implements Commandable {
 	
-	public static final String KEY = "echo";
+	public static final String KEY = "err";
 
 	@Override
 	public String getKey() {
@@ -37,8 +38,8 @@ public class ErrCommand implements Commandable {
 	}
 
 	@Override
-	public void doCommand(String args) throws CommandException {
-		ExecutableRegistry.getExecutable().printErr(args);
+	public void doCommand(CommandDTO command) throws CommandException {
+		ExecutableRegistry.getExecutable().printErr(command.getArgs());
 	}
 
 }

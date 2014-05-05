@@ -25,6 +25,7 @@ package  com.keraton.bbcmd.client.command.basic;
 
 import com.keraton.bbcmd.client.command.share.ExitCommandable;
 import com.keraton.bbcmd.client.command2ui.ExecutableRegistry;
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
 
 public class ExitCommand implements ExitCommandable {
 
@@ -36,7 +37,7 @@ public class ExitCommand implements ExitCommandable {
 	}
 
 	@Override
-	public void doCommand(String args) {
+	public void doCommand(CommandDTO command) {
 		ExecutableRegistry.getExecutable().print("Exit");
 	}
 

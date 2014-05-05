@@ -30,6 +30,7 @@ import com.keraton.bbcmd.client.command.exception.CommandException;
 import com.keraton.bbcmd.client.command.share.Commandable;
 import com.keraton.bbcmd.client.command.share.Descriptable;
 import com.keraton.bbcmd.client.command2ui.ExecutableRegistry;
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
 
 public class HelpCommand implements Commandable {
 	
@@ -47,7 +48,7 @@ public class HelpCommand implements Commandable {
 	}
 
 	@Override
-	public void doCommand(String args) throws CommandException {
+	public void doCommand(CommandDTO commandInput) throws CommandException {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<table>");
 		for (Commandable command : commands.values()) {

@@ -29,11 +29,13 @@ import com.keraton.bbcmd.client.command.basic.CleanCommand;
 import com.keraton.bbcmd.client.command.basic.EchoCommand;
 import com.keraton.bbcmd.client.command.basic.EmptyCommand;
 import com.keraton.bbcmd.client.command.basic.EnvCommand;
+import com.keraton.bbcmd.client.command.basic.ErrCommand;
 import com.keraton.bbcmd.client.command.basic.HelpCommand;
 import com.keraton.bbcmd.client.command.exception.CommandException;
 import com.keraton.bbcmd.client.command.share.Commandable;
 import com.keraton.bbcmd.client.command.share.Stackable;
 import com.keraton.bbcmd.client.command.stack.js.EvalStackable;
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
 
 public final class ClientStack implements Stackable {
 	
@@ -52,6 +54,7 @@ public final class ClientStack implements Stackable {
 		addCommand(new EmptyCommand());
 		addCommand(new EchoCommand());
 		addCommand(new EvalStackable());
+		addCommand(new ErrCommand());
 	}
 
 	public void addCommand(Commandable command){
@@ -59,6 +62,10 @@ public final class ClientStack implements Stackable {
 	}
 	
 	@Override
+	public Commandable getCommands(CommandDTO commandDTO) {
+		return mapCommands.get(commandDTO.getCommand());
+	}
+	
 	public Commandable getCommands(String key) {
 		return mapCommands.get(key);
 	}
@@ -69,7 +76,7 @@ public final class ClientStack implements Stackable {
 	}
 
 	@Override
-	public void doCommand(String args) throws CommandException {
+	public void doCommand(CommandDTO command) throws CommandException {
 		throw new CommandException("Main command should not be called");
 	}
 

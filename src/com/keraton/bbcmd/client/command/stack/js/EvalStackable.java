@@ -23,7 +23,6 @@
  */
 package  com.keraton.bbcmd.client.command.stack.js;
 
-import com.google.gwt.core.shared.GWT;
 import com.keraton.bbcmd.client.command.basic.EmptyCommand;
 import com.keraton.bbcmd.client.command.basic.ExitCommand;
 import com.keraton.bbcmd.client.command.exception.CommandException;
@@ -31,15 +30,16 @@ import com.keraton.bbcmd.client.command.share.Commandable;
 import com.keraton.bbcmd.client.command.share.Descriptable;
 import com.keraton.bbcmd.client.command.share.Directable;
 import com.keraton.bbcmd.client.command.share.Stackable;
+import com.keraton.bbcmd.client.command.stack.ClientStack;
 import com.keraton.bbcmd.client.command2ui.ExecutableRegistry;
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
+import com.keraton.bbcmd.client.common.utils.CommandDTO.Source;
 
 public class EvalStackable implements 
 	Commandable, Descriptable, Stackable, Directable {
 	
 	public static String KEY = "eval";
-	
 	private ExitCommand exitCommand = new ExitCommand();
-	private EmptyCommand emptyCommand = new EmptyCommand();
 	
 	public EvalStackable() {
 		JSUtility.exportStaticMethod();
@@ -56,10 +56,9 @@ public class EvalStackable implements
 	}
 
 	@Override
-	public void doCommand(String arg) throws CommandException {
-		GWT.log(arg);
+	public void doCommand(CommandDTO commandDTO) throws CommandException {
 		try {
-			eval(arg);
+			eval(commandDTO.getCommandArgs());
 		}
 		catch(Exception e) {
 			ExecutableRegistry.getExecutable().printErr(e.getMessage());
@@ -74,12 +73,17 @@ public class EvalStackable implements
 	}-*/;
 
 	@Override
-	public Commandable getCommands(String key) {
+	public Commandable getCommands(CommandDTO commandDTO) {
+		if (commandDTO.getSource() == Source.JS) {
+			return ClientStack.getINSTANCE().getCommands(commandDTO.getCommand());
+		}
+		
+		String key = commandDTO.getCommand();
 		if (ExitCommand.KEY.equals(key)) {
 			return exitCommand;
 		}
-		if ("".equals(key) || null == key) {
-			return emptyCommand;
+		else if ("".equals(key) || null == key) {
+			return ClientStack.getINSTANCE().getCommands(EmptyCommand.KEY);
 		}
 		return this;
 	}

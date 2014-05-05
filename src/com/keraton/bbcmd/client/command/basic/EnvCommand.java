@@ -29,6 +29,7 @@ import com.keraton.bbcmd.client.command.exception.IllegalOptionCommandException;
 import com.keraton.bbcmd.client.command.share.Commandable;
 import com.keraton.bbcmd.client.command2ui.ExecutableRegistry;
 import com.keraton.bbcmd.client.common.Environment;
+import com.keraton.bbcmd.client.common.utils.CommandDTO;
 
 public class EnvCommand implements Commandable {
 	
@@ -40,8 +41,9 @@ public class EnvCommand implements Commandable {
 	}
 
 	@Override
-	public void doCommand(String textInput) throws IllegalOptionCommandException {
+	public void doCommand(CommandDTO command) throws IllegalOptionCommandException {
 		Environment environment = Environment.getInstance();
+		String textInput = command.getArgs();
 		String[] args = textInput.split(" ");
 		
 		if (textInput.isEmpty()) {
