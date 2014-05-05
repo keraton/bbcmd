@@ -24,7 +24,6 @@
 package  com.keraton.bbcmd.server;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +31,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.keraton.mathj.MathJ;
-import org.keraton.mathj.context.Context;
 import org.keraton.mathj.context.impl.MapContext;
 import org.keraton.mathj.func.Function;
 import org.keraton.mathj.reader.FunctionReader;
