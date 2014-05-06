@@ -11,5 +11,7 @@
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.keraton.bbcmd.client.BBCmd'/>
   <source path='client'/>
+  
+  <add-linker name="xsiframe"/>
 
 </module>
