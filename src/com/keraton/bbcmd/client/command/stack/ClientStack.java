@@ -30,8 +30,8 @@ import com.keraton.bbcmd.client.command.basic.EchoCommand;
 import com.keraton.bbcmd.client.command.basic.EmptyCommand;
 import com.keraton.bbcmd.client.command.basic.EnvCommand;
 import com.keraton.bbcmd.client.command.basic.ErrCommand;
+import com.keraton.bbcmd.client.command.basic.WelcomeCommand;
 import com.keraton.bbcmd.client.command.basic.HelpCommand;
-import com.keraton.bbcmd.client.command.basic.LsCommand;
 import com.keraton.bbcmd.client.command.exception.CommandException;
 import com.keraton.bbcmd.client.command.share.Commandable;
 import com.keraton.bbcmd.client.command.share.Stackable;
@@ -50,13 +50,13 @@ public final class ClientStack implements Stackable {
 	
 	private ClientStack() {
 		addCommand(new CleanCommand());
-		addCommand(new LsCommand(mapCommands));
+		addCommand(new HelpCommand(mapCommands));
 		addCommand(new EnvCommand());
 		addCommand(new EmptyCommand());
 		addCommand(new EchoCommand());
 		addCommand(new EvalStackable());
 		addCommand(new ErrCommand());
-		addCommand(new HelpCommand());
+		addCommand(new WelcomeCommand());
 	}
 
 	public void addCommand(Commandable command){

@@ -3,7 +3,7 @@
 	
 	<div class="root">
 		<div ui:field="inputBox"></div>
-		<p><span ui:field="inputStack"></span><span ui:field="inputSymbol"/>&nbsp;<span contenteditable="true" autofocus="true" ui:field="inputCmd"></span><span contenteditable="true" autofocus="true" ui:field="boxCmd" style="visibility:hidden;"></span></p>
+		<p><span ui:field="inputStack"></span><span ui:field="inputSymbol"/>&nbsp;<span contenteditable="true" autofocus="true" ui:field="inputCmd"></span><span ui:field="brCmd" style="visibility:hidden; color: #58FA58">Ctrl+Enter to go back<br/></span><span contenteditable="true" autofocus="true" ui:field="boxCmd" style="visibility:hidden;"></span></p>
 	</div>
 
 </ui:UiBinder>

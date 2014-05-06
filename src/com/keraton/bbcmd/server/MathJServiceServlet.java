@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.keraton.mathj.MathJ;
+import org.keraton.mathj.context.VariableNotFoundException;
 import org.keraton.mathj.context.impl.MapContext;
 import org.keraton.mathj.func.Function;
 import org.keraton.mathj.reader.FunctionReader;
@@ -78,7 +79,8 @@ public class MathJServiceServlet extends HttpServlet {
 				Function func = reader.read(value.trim());
 				resp.getWriter().write("" + mathJ.apply(func).value());
 			}
-			
+		} catch (VariableNotFoundException e) {
+			resp.sendError(HttpServletResponse.SC_EXPECTATION_FAILED, e.getMessage());
 		} catch (SyntaxException e) {
 			resp.sendError(HttpServletResponse.SC_EXPECTATION_FAILED, e.getMessage());
 		} catch (ValidationReaderException e) {

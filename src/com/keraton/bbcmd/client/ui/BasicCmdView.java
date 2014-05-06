@@ -63,7 +63,7 @@ public class BasicCmdView extends UIObject implements IBBCmdView {
 	DivElement inputBox;
 	
 	@UiField
-	Element inputCmd, boxCmd, inputStack, inputSymbol;
+	Element inputCmd, boxCmd, inputStack, inputSymbol, brCmd;
 	
 
 	public BasicCmdView() {
@@ -112,6 +112,7 @@ public class BasicCmdView extends UIObject implements IBBCmdView {
 	private void focusOnInputMode() {
 		cmd = boxCmd.getInnerText();
 		boxCmd.getStyle().setVisibility(Visibility.HIDDEN);
+		brCmd.getStyle().setVisibility(Visibility.HIDDEN);
 		inputCmd.getStyle().setVisibility(Visibility.VISIBLE);
 		inputCmd.focus();
 		inputCmd.setInnerText(boxCmd.getInnerHTML());
@@ -143,8 +144,8 @@ public class BasicCmdView extends UIObject implements IBBCmdView {
 
 	private void focusOnBoxMode() {
 		boxCmd.setInnerText(inputCmd.getInnerText());
-		inputCmd.setInnerText("");
 		inputCmd.getStyle().setVisibility(Visibility.HIDDEN);
+		brCmd.getStyle().setVisibility(Visibility.VISIBLE);
 		boxCmd.getStyle().setVisibility(Visibility.VISIBLE);
 		boxCmd.focus();
 	}
