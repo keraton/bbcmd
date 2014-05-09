@@ -37,7 +37,7 @@ public class HTTPServerCallerImpl implements ServerCaller {
 	public void send(RequestData requestData, final RequestCallback callback) {
 		
 		RequestBuilder builder = new RequestBuilder(requestData.getMethod(), 
-				URL.encode("/" + requestData.getPath()));
+				URL.encode(requestData.getPath()));
 
 		try {
 			GWT.log(requestData.getRequest());
