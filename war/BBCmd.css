@@ -1,6 +1,3 @@
-/* html { */
-/* 	height: 100%; */
-/* } */
 .bbcmd_body {
 	margin: 0;
 	padding: 0;
@@ -16,15 +13,15 @@
 	border-radius: 10px;
 }
 
-.err {
+.bbcmd_err {
 	color: orange;
 }
 
-.desc {
+.bbcmd_desc {
 	color: yellow;
 }
 
-.root {
+.bbcmd_root {
 	margin: 15px 10px 10px 10px;
 	overflow: auto;
 	width: 97%;
@@ -41,9 +38,14 @@
 
 .bbcmd_body table {
 	margin-top: -7px;
+	margin-bottom: 0px;
 	padding: 0 0 0 0;	
+	padding: 2px 2px;
 }
 
 .bbcmd_body table tr td {
 	font-family: "Courier New", Courier, mono;
+	border-color: black;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }

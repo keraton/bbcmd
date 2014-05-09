@@ -54,7 +54,7 @@ public class HelpCommand implements Commandable {
 		for (Commandable command : commands.values()) {
 			sb.append("<tr>");
 			appendTD(sb, command.getKey());
-			appendTD(sb, command instanceof Descriptable ? "<span class=\'desc\'> " + 
+			appendTD(sb, command instanceof Descriptable ? "<span class=\'bbcmd_desc\'> " + 
 									((Descriptable)command).getDescription() + "</span>" 
 									: "");
 			sb.append("</tr>");

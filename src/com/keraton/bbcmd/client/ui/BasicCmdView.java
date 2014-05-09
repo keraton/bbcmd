@@ -48,6 +48,8 @@ public class BasicCmdView extends UIObject implements IBBCmdView {
 
 	private static BBCmdUiBinder uiBinder = GWT
 			.create(BBCmdUiBinder.class);
+	
+	private static final String ERR_CSS = "bbcmd_err";
 
 	interface BBCmdUiBinder extends UiBinder<DivElement, BasicCmdView> {
 	}
@@ -189,7 +191,7 @@ public class BasicCmdView extends UIObject implements IBBCmdView {
 	@Override
 	public void addErrText(String err) {
 		com.google.gwt.user.client.Element p = DOM.createElement("p");
-		p.addClassName("err");
+		p.addClassName(ERR_CSS);
 		p.setInnerHTML(err);
 		inputBox.appendChild(p);
 		inputCmd.setInnerText(null);
