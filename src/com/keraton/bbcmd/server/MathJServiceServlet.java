@@ -24,6 +24,8 @@
 package  com.keraton.bbcmd.server;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.keraton.mathj.MathJ;
+import org.keraton.mathj.context.Context;
 import org.keraton.mathj.context.VariableNotFoundException;
 import org.keraton.mathj.context.impl.MapContext;
 import org.keraton.mathj.func.Function;
@@ -42,12 +45,12 @@ import org.keraton.mathj.reader.impl.Lexeme;
 import org.keraton.mathj.reader.impl.Lexeme.Type;
 import org.keraton.mathj.reader.impl.Lexer;
 
+import com.keraton.bbcmd.server.session.MathJSession;
+
 
 @SuppressWarnings("serial")
 public class MathJServiceServlet extends HttpServlet {
 	
-	
-
 	@Override
 	protected void doOptions(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -103,10 +106,11 @@ public class MathJServiceServlet extends HttpServlet {
 	}
 
 	private MathJ getContext(HttpServletRequest req) {
-		if (null == req.getSession().getAttribute("context")) {
-			req.getSession().setAttribute("context", new MapContext());
+		String id = req.getSession().getId();
+		if (null == MathJSession.getInstance().get(id)) {
+			MathJSession.getInstance().put(id, new MapContext());
 		}
-		MapContext mapContext= (MapContext) req.getSession().getAttribute("context");
+		Context mapContext= MathJSession.getInstance().get(id);
 		MathJ mathj = new MathJ(mapContext);
 		return mathj;
 	}
