@@ -45,10 +45,24 @@ import org.keraton.mathj.reader.impl.Lexer;
 
 @SuppressWarnings("serial")
 public class MathJServiceServlet extends HttpServlet {
+	
+	
+
+	@Override
+	protected void doOptions(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.addHeader("Access-Control-Allow-Origin", "*");
+	    response.addHeader("Access-Control-Allow-Methods", "POST, GET, UPDATE, OPTIONS");
+	    response.addHeader("Access-Control-Allow-Headers", "x-http-method-override");
+	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		
+		resp.addHeader("Access-Control-Allow-Origin", "*");
+		resp.addHeader("Access-Control-Allow-Methods", "POST, GET, UPDATE, OPTIONS");
+		resp.addHeader("Access-Control-Allow-Headers", "x-http-method-override");
 		
 		String value = (String) req.getParameter("value");
 		value = value.replaceAll("%2B", "+");
